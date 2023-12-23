@@ -9,7 +9,7 @@ export default {
   ],
   theme: {
     screens: {
-      xs: "320px",
+      xs: "375px",
       sm: "640px",
       md: "768px",
       lg: "1024px",
@@ -55,7 +55,7 @@ export default {
         quicksand: "var(--font-quicksand)",
         inter: "var(--font-inter)",
       },
-      
+
       keyframes: {
         "accordion-down": {
           from: { height: 0 },

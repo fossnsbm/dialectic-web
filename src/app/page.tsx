@@ -1,9 +1,12 @@
-type Props = {}
+import { Savedbar } from "@/components/common/layout/";
+type Props = {};
 
 const Home = (props: Props) => {
   return (
-    <div>Dialectic</div>
-  )
-}
+    <>
+      <Savedbar></Savedbar>
+    </>
+  );
+};
 
-export default Home
+export default Home;
