@@ -4,7 +4,7 @@ import {
   Hero,
   Popular_ep_sec,
   Latest_ep,
-  Episode_section,
+  // Episode_section,
   FOSS_section,
   Logos,
   Newsletter_section,

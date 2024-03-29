@@ -1,7 +1,7 @@
 import React from 'react'
 import Containerf from 'components/common/containerf'
 import Searchq from 'components/common/layout/search'
-import Episodecard from 'components/common/Episode_card'
+// import Episodecard from 'components/common/Episode_card'
 import { Button } from '@mui/material'
 import Navigation from 'components/common/layout/navigation'
 type Props = {}
@@ -22,12 +22,12 @@ const Favorites = (props: Props) => {
         </div>
       </Containerf>
 
-      <Containerf>
+      {/* <Containerf> */}
+      {/* <Episodecard />
         <Episodecard />
         <Episodecard />
-        <Episodecard />
-        <Episodecard />
-      </Containerf>
+        <Episodecard /> */}
+      {/* </Containerf> */}
 
       <Containerf>
         <div className="w-full flex justify-center items-center  pt-24 pb-20">

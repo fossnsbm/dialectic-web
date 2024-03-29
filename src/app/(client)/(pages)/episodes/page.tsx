@@ -1,7 +1,7 @@
 import React from 'react'
 import Containerf from 'components/common/containerf'
 import Searchq from 'components/common/layout/search'
-import Episodecard from 'components/common/Episode_card'
+// import Episodecard from 'components/common/Episode_card'
 import { Button } from '@mui/material'
 import { Savedbar } from 'components/common'
 import Navigation from 'components/common/layout/navigation'
@@ -27,10 +27,10 @@ const Allepisode = (props: Props) => {
 
       <Containerf>
         <div className=" p-9">
+          {/* <Episodecard />
           <Episodecard />
           <Episodecard />
-          <Episodecard />
-          <Episodecard />
+          <Episodecard /> */}
         </div>
       </Containerf>
 

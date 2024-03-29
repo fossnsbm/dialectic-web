@@ -1,7 +1,7 @@
 export { default as Hero } from './Hero'
 export { default as Popular_ep_sec } from './popular_epi_sec'
 export { default as Latest_ep } from './latest'
-export { default as Episode_section } from './Episode_section'
+// export { default as Episode_section } from './Episode_section'
 export { default as FOSS_section } from './foss'
 export { default as Logos } from './logos'
 export { default as Newsletter_section } from './NewsLetter'
