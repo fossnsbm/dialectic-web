@@ -1,6 +1,5 @@
 import React from 'react'
 import { Footer, Navigation, Savedbar } from 'components/common/layout/'
-import { Containerf } from 'components/common'
 import {
   Hero,
   Popular_ep_sec,
@@ -16,12 +15,12 @@ type Props = {}
 const Home = (props: Props) => {
   return (
     <div>
-      <Savedbar />
+      {/* <Savedbar /> */}
       <Navigation />
       <Hero />
       <Popular_ep_sec />
       <Latest_ep />
-      <Episode_section />
+      {/* <Episode_section /> */}
       <FOSS_section />
       <Logos />
       <Newsletter_section />

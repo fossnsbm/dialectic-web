@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button } from '../common'
-import Containerf from '../common/containerf'
+import { Button, Container } from '../common'
 import '../../styles/fonts/fonts'
 import Image from 'next/image'
 import latest_img from '/public/images/Latest Episode Section Image.png'
@@ -9,8 +8,8 @@ import { FaRegCirclePlay } from 'react-icons/fa6'
 const latest = () => {
   return (
     <div>
-      <Containerf>
-        <div className=" flex flex-col sm:flex-row items-center justify-center sm:gap-40 gap-10 m-5 sm:my-20">
+      <Container>
+        <div className="flex flex-col sm:flex-row items-center justify-center sm:gap-40 gap-10 m-5 sm:my-20">
           <Image
             alt={'latest image'}
             src={latest_img}
@@ -47,7 +46,7 @@ const latest = () => {
             </div>
           </div>
         </div>
-      </Containerf>
+      </Container>
     </div>
   )
 }

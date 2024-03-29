@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Containerf } from '../common'
+import { Button, Container, Containerf } from '../common'
 import '../../styles/fonts/fonts'
 
 // images
@@ -18,23 +18,25 @@ import br from '/public/images/br.png'
 
 const hero = () => {
   return (
-    <Containerf>
-      <div className=" flex sm:flex-row flex-col gap-4 items-center justify-center mt-4 mb-4 text-gray-900 text-lg font-medium pt-4  ">
-        <div className="sm:w-[60%] w-full flex flex-col sm:gap-16 gap-8 md:items-start items-center md:text-justify text-justify">
-          <div className="flex items-center justify-center gap-6 bg-gray-200 rounded-full pr-4">
+    <Container>
+      <div className="flex lg:flex-row flex-col gap-4 items-center justify-center mt-4 mb-4 text-gray-900 text-lg font-medium pt-4  py-10">
+        <div className="sm:w-[60%] w-full flex flex-col gap-8 md:gap-10 md:items-start text-center items-center md:text-justify ">
+          <div className="flex items-center justify-center gap-6 bg-gray-50 rounded-full pr-4">
             <div>
               <Button variant={'blue'} size={'rounded'}>
                 New
               </Button>
             </div>
-            <div>Lorem ipsum dolor sit amet.</div>
+            <div className="font-medium text-gray-800 mb-[3px] text-base pr-3">
+              Lorem ipsum dolor sit amet.
+            </div>
           </div>
-          <div className="text-5xl w-[80%] whitespace-pre-line font-inter font-semibold md:text-justify tracking-wider">
-            Exploring Tomorrow's{'\n'}
+          <div className="text-4xl font-semibold md:text-6xl md:whitespace-pre-line font-inter md:font-medium md:text-justify md:leading-[4.5rem]">
+            Exploring Tomorrow&apos;s{'\n'}
             Tech Innovations, {'\n'}
             One Byte at a Time.
           </div>
-          <div className="text-md  w-[80%] leading-9">
+          <div className="text-md md:w-[80%] leading-7 font-quicksand ">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et
             est leo. Nulla fermentum ultrices ullamcorper. Nam eleifend mi sed
             sem convallis condimentum.
@@ -45,8 +47,10 @@ const hero = () => {
             </Button>
           </div>
           <div className="flex items-center justify-center gap-4">
-            <div>Listen on: </div>
-            <div className="flex items-center gap-4 justify-center animate pt-4 ">
+            <div className="flex items-center justify-center">
+              <p>Listen on:</p>
+            </div>
+            <div className="flex items-center gap-4 justify-center animate">
               <a href="">
                 <Image src={spotify} alt="icon"></Image>
               </a>
@@ -87,7 +91,7 @@ const hero = () => {
           </div>
         </div>
       </div>
-    </Containerf>
+    </Container>
   )
 }
 

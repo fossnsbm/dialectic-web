@@ -9,20 +9,20 @@ import saveIcon from '/public/images/save.png'
 
 import '../../styles/fonts/fonts'
 
-const Popular_ep = (props) => {
+const Popular_ep = (props: any) => {
   const { backGround, speakerInfo, episodeTitle, heading } = props
 
   return (
-    <div className="w-fit h-fit">
-      <div className="rounded-[20px]  w-fit h-fit group">
-        <div className="relative w-fit">
+    <div className="">
+      <div className="rounded-[20px] ">
+        <div className="relative ">
           <img src={backGround} alt="Background" />
-          <div className="absolute w-full h-full  flex flex-col justify-between -bottom-0 rounded-[20px] bg-gradient-to-t bg-opacity-75 from-gray-900  to-transparent p-4">
+          <div className="absolute w-full h-full  flex flex-col justify-between -bottom-0 rounded-[20px] border !border-gray-0 to-transparent p-4">
             <div className="flex justify-end">
               <Button
                 variant={'black'}
                 size={'rounded'}
-                className="bg-gray outline text-gray-0 backdrop-blur-lg h-7 px-2 font-inter linear"
+                className="bg-gray outline outline-1 text-gray-0 backdrop-blur-lg h-7 px-2 font-inter linear"
               >
                 {speakerInfo}
               </Button>

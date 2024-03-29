@@ -57,7 +57,7 @@ const popular_ep_sec = (props: Props) => {
           </div>
         </Containerf>
         <Containerf>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-8 py-32">
+          <div className="flex flex-wrap justify-center lg:justify-between items-center gap-8 py-32">
             <Popular_ep {...card1} />
             <Popular_ep {...card2} />
             <Popular_ep {...card3} />
