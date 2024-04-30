@@ -9,14 +9,17 @@ const latest = () => {
   return (
     <div>
       <Container>
-        <div className="flex flex-col sm:flex-row items-center justify-center sm:gap-40 gap-10 m-5 sm:my-20">
-          <Image
-            alt={'latest image'}
-            src={latest_img}
-            width={450}
-            height={500}
-          />
-          <div className="felx flex-col justify-between items-center">
+        <div className="flex md:flex-row flex-col  gap-5 py-10  ">
+          <div className="flex flex-1 md:w-auto  md:justify-start justify-center ">
+            <Image
+              alt={'latest image'}
+              src={'/images/last_epi/Latest_Episode.png'}
+              width={400}
+              height={400}
+            />
+          </div>
+
+          <div className="flex md:flex-1 flex-col gap-5 md:items-start items-center md:text-start text-center w-auto ">
             <div className="flex items-center gap-5 bg-gray-50 rounded-full w-80 ">
               <div>
                 <Button variant={'blue'} size={'rounded'}>
@@ -25,19 +28,17 @@ const latest = () => {
               </div>
               <div>Speaker Name | 33 mins</div>
             </div>
-            <br />
-            <h1 className="text-5xl md:text-6xl font-medium tracking-wide">
-              Start career path as
-              <br /> a Product Designer <br />
-              in Startup
-            </h1>
-            <br />
-            <h1 className="text-4l text-gray-400">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et
-              est leo. Nulla fermentum ultrices ullamcorper. Nam eleifend mi sed
-              sem convallis condimentum.
-            </h1>
-            <br />
+
+            <div className="flex flex-col gap-2 ">
+              <div className=" text-4xl md:text-6xl font-medium ">
+                Start career path as a Product Designer in Startup
+              </div>
+              <div className=" text-lg text-gray-400 text-balance">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                et est leo. Nulla fermentum ultrices ullamcorper.
+              </div>
+            </div>
+
             <div className="flex items-center sm:justify-start justify-center">
               <Button className="flex items-center gap-3 justify-center">
                 <div>Listen Now</div>

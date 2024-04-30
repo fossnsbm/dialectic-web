@@ -7,8 +7,8 @@ import { Containerf } from 'components/common/'
 const foss = () => {
   return (
     <Containerf>
-      <div className="flex items-center justify-between sm:flex-row flex-col sm:gap-40 gap-4 my-6">
-        <div className="flex flex-1 flex-col items-start whitespace-pre-line justify-evenly gap-10">
+      <div className="flex items-center justify-between md:flex-row flex-col lg:gap-40 gap-8 py-10">
+        <div className="flex flex-1 flex-col md:items-start items-center whitespace-pre-line justify-evenly gap-10">
           <div className="flex items-center justify-center sm:text-base text-xs gap-6 bg-gray-200 rounded-full pr-4">
             <div>
               <Button variant={'blue'} size={'rounded'}>
@@ -30,8 +30,14 @@ const foss = () => {
             <Button>Keep in Touch with us</Button>
           </div>
         </div>
+
         <div className="flex-1">
-          <Image src={FOSS_Pictures} alt="image"></Image>
+          <Image
+            src={'/images/foss/Foss pictures.png'}
+            width={500}
+            height={500}
+            alt="image"
+          ></Image>
         </div>
       </div>
     </Containerf>

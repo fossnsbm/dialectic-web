@@ -2,34 +2,37 @@ import React from 'react'
 import Containerf from 'components/common/containerf'
 import { Button } from 'components/common/buttons/'
 import { Input } from '../common/ui/input'
+import { Container } from '../common'
 
 const NewsLetter = () => {
   return (
     <div className="" id="bge">
-      <Containerf>
-        <div className="p-12 ">
-          <div className="flex w-full sm:flex-row flex-col items-center justify-center my-10">
-            <div className="flex flex-1 w-full flex-col items-start justify-center gap-4">
-              <div className="text-5xl font-semibold text-white-0">
+      <Container>
+        <div className="py-12 ">
+          <div className="flex w-full md:flex-row flex-col  justify-center my-20">
+            <div className="flex flex-1  flex-col md:items-start  items-center  gap-2 py-2">
+              <div className=" md:text-5xl sm:text-4xl text-2xl font-semibold text-gray-0">
                 Sign up for our newsletter!{''}
               </div>
-              <div className=" whitespace-pre-line text-white-0 text-left">
-                Get notified about updates and be the first to get early access{' '}
-                {'\n'}
+              <div className="text-gray-0 text-sm ">
+                Get notified about updates and be the first to get early access
                 to new episodes.
               </div>
             </div>
-            <div className="flex flex-col m-4 sm:flex-row items-center justify-center flex-1 gap-2 w-full">
+
+            <div className="flex flex-1 flex-col  md:flex-row items-center justify-center  gap-2">
               <input
                 type="text"
                 placeholder="Enter Email"
-                className="border-0 rounded-lg h-12 w-full text-center"
+                className="flex border-0 rounded-lg h-12 w-full  focus:shadow-lg focus:outline-blue-400 px-4"
               />
-              <Button variant={'black'}>Subscribe</Button>
+              <Button variant={'black'} className="flex">
+                Subscribe
+              </Button>
             </div>
           </div>
         </div>
-      </Containerf>
+      </Container>
     </div>
   )
 }
