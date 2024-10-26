@@ -1,7 +1,7 @@
 import React from 'react'
 import Containerf from 'components/common/containerf'
 import { Button } from 'components/common/buttons/'
-import { Input } from '../common/ui/input'
+import { Input } from '@/components/ui/input'
 import { Container } from '../common'
 
 const NewsLetter = () => {
