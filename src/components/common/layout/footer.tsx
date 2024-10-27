@@ -28,7 +28,7 @@ export default function Footer() {
 
           <div className="flex flex-col flex-1 items-center justify-center gap-4">
             {NavLinks.map((item) => (
-              <div key={item.id}>
+              <div key={item.name}>
                 <Link
                   className="block py-2 pl-3 pr-4 text-gray-600 sm:text-xl rounded md:p-0 hover:text-blue-400 hover:font-bold hover:animate-pulse"
                   href={item.link}
