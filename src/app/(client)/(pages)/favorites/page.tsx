@@ -5,9 +5,8 @@ import Searchq from 'components/common/layout/search'
 import { Button } from '@mui/material'
 import Navigation from 'components/common/layout/navigation'
 import { Container } from '@/components/common'
-type Props = {}
 
-const Favorites = (props: Props) => {
+const Favorites = () => {
   return (
     <div>
       <Container>

@@ -55,10 +55,10 @@ const Navigation = () => {
                 className="transition-all duration-300 ease-in-out"
               />
             </div>
-            <div className="hidden menu md:block md:w-auto" id="navbar">
+            <div className="hidden menu md:block md:w-auto">
               <ul className="flex p-4 mt-0 md:p-0 md:flex-row md:space-x-8 font-semibold">
                 {NavLinks.map((item) => (
-                  <div key={item.id}>
+                  <div key={item.name}>
                     <Link
                       className="block py-2 pl-3 pr-4 text-gray-600 sm:text-xl rounded md:p-0 hover:text-blue-400 hover:font-bold hover:animate-pulse"
                       href={item.link}

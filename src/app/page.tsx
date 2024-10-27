@@ -1,17 +1,27 @@
 import React from 'react'
 import { Footer, Navigation, Savedbar } from 'components/common/layout/'
-
+import Episode_card from '@/components/common/Episode_card'
+import {
+  FOSS_section,
+  Hero,
+  Latest_ep,
+  Logos,
+  Newsletter_section,
+} from '@/components/landing'
 import EpisodeSection from '@/components/landing/Episode_section'
-import Homepage from './(client)/(pages)/home/page'
+import Popular_ep_sec from '@/components/landing/popular_epi_sec'
 
-type Props = {}
-
-const Home = (props: Props) => {
+const Home: React.FC = () => {
   return (
     <div>
-      <Savedbar />
-      <Navigation />
-      <Homepage />
+      <Hero />
+      <Popular_ep_sec />
+      <Latest_ep />
+      <EpisodeSection />
+      <FOSS_section />
+      <Episode_card />
+      <Logos />
+      <Newsletter_section />
       <Footer />
     </div>
   )
