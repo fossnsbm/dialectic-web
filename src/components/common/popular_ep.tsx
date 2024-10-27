@@ -14,7 +14,7 @@ const Popular_ep = (props: any) => {
     <div className="">
       <div className="rounded-[20px] ">
         <div className="relative ">
-          <Image src={backGround} alt="Background" />
+          <Image src={backGround} alt="Background" width={300} height={300} />
           <div className="absolute w-full h-full  flex flex-col justify-between -bottom-0 rounded-[20px] border !border-gray-0 to-transparent p-4">
             <div className="flex justify-end">
               <Button
