@@ -9,7 +9,10 @@ type Props = {}
 const Home = (props: Props) => {
   return (
     <div>
+      <Savedbar />
+      <Navigation />
       <Homepage />
+      <Footer />
     </div>
   )
 }
