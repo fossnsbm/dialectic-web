@@ -14,6 +14,7 @@ import Popular_ep_sec from '@/components/landing/popular_epi_sec'
 const Home: React.FC = () => {
   return (
     <div>
+      <Navigation />
       <Hero />
       <Popular_ep_sec />
       <Latest_ep />
