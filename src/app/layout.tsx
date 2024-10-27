@@ -4,7 +4,7 @@ import '@/styles/globals.css'
 import { main } from '@/data/metadata'
 import { Footer, Navigation, Savedbar } from '@/components/common'
 import NewsLetter from '@/components/landing/NewsLetter'
-
+import { Toaster } from '@/components/ui/toaster'
 export const metadata: Metadata = {
   title: 'Dialectic',
   description: main.description,
@@ -20,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${quicksand.variable} ${inter.variable}`}>
         {children}
+        <Toaster />
       </body>
     </html>
   )
