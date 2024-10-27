@@ -19,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${quicksand.variable} ${inter.variable}`}>
+        <Savedbar />
+        <Navigation />
         {children}
+        <Footer />
       </body>
     </html>
   )

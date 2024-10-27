@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "Running pre-push hook"
+yarn run build
+
+if [ $? -eq 0 ]; then
+  echo "Build succeeded, proceeding with push"
+  exit 0
+else
+  echo "Build failed, aborting push"
+  exit 1
+fi
