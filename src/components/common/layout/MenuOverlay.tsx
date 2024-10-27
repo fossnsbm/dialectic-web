@@ -17,7 +17,7 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({ links, closeMenu }) => {
   return (
     <div className="flex flex-col py-4 items-center">
       {NavLinks.map((item) => (
-        <div key={item.id}>
+        <div key={item.name}>
           <Link
             className="block py-2 pl-3 pr-4 text-gray-600 sm:text-xl rounded md:p-0 hover:text-blue-400 hover:font-bold hover:animate-pulse"
             href={item.link}
