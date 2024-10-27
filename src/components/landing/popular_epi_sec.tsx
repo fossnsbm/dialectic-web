@@ -1,10 +1,10 @@
 import React from 'react'
 import Containerf from '../common/containerf'
 import Popular_ep from '@/components/common/popular_ep'
-import bgImage1 from '/public/images/bgimg1.svg'
-import bgImage2 from '/public/images/bgimg2.svg'
-import bgImage3 from '/public/images/bgimg3.svg'
-import bgImage4 from '/public/images/bgimg4.svg'
+import bgImage1 from '/public/images/bgImg1.svg'
+import bgImage2 from '/public/images/bgImg2.svg'
+import bgImage3 from '/public/images/bgImg3.svg'
+import bgImage4 from '/public/images/bgImg4.svg'
 import '../../styles/fonts/fonts'
 
 type Props = {}
