@@ -36,8 +36,8 @@ export const navItemadmin: NavItemadmin[] = [
     label: 'Overview',
   },
   {
-    title: 'User',
-    href: '/admin/user',
+    title: 'Add Episode',
+    href: '/admin/addepisode',
     icon: 'user',
     label: 'User',
   },

@@ -6,9 +6,7 @@ import { Button } from '@mui/material'
 import { Container, Savedbar } from 'components/common'
 import Navigation from 'components/common/layout/navigation'
 
-type Props = {}
-
-const Allepisode = (props: Props) => {
+const Allepisode = () => {
   return (
     <div>
       <Container>
