@@ -39,19 +39,15 @@ export default function JoySignInSideTemplate() {
   async function onSubmitLogin(data: z.infer<typeof FormSchema>) {
     setLoading(true)
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/main_server/api/user/login`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: data.email,
-            password: data.password,
-          }),
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
+        body: JSON.stringify(data),
+      })
+
+      console.log(response)
 
       const result = await response.json()
 
@@ -87,7 +83,7 @@ export default function JoySignInSideTemplate() {
     return (
       <div>
         <div className="flex items-center justify-center min-h-screen">
-          <span className="loader"></span>
+          <span className="loader">loading....</span>
         </div>
       </div>
     )
