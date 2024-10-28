@@ -1,3 +1,4 @@
+import { time, timeStamp } from 'console'
 import mongoose from 'mongoose'
 
 const SubscriptionSchema = new mongoose.Schema({
@@ -7,6 +8,7 @@ const SubscriptionSchema = new mongoose.Schema({
     unique: true, // Ensure each email is unique
     lowercase: true,
     trim: true,
+    timeStamp: true,
   },
   createdAt: {
     type: Date,

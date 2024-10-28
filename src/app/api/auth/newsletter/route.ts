@@ -13,17 +13,27 @@ const emailSchema = new mongoose.Schema<IEmail>({
 })
 
 const EmailModel: Model<IEmail> =
-  mongoose.models.Email || mongoose.model<IEmail>('Subscription', emailSchema)
+  mongoose.models.Subscriptionemails ||
+  mongoose.model<IEmail>('Subscriptionemails', emailSchema)
 
 export async function POST(req: Request): Promise<Response> {
   try {
-    await connectToDatabase() // Connect to the database
-
+    await connectToDatabase()
     const { email } = await req.json()
 
-    const newEmail = new EmailModel({ email })
-    await newEmail.save()
-
+    const existingEmail = await EmailModel.findOne({ email })
+    if (existingEmail) {
+      return new Response(
+        JSON.stringify({ message: 'Email is already subscribed' }),
+        {
+          status: 409,
+          headers: { 'Content-Type': 'application/json' },
+        },
+      )
+    } else {
+      const newEmail = new EmailModel({ email })
+      await newEmail.save()
+    }
     return new Response(
       JSON.stringify({ message: 'Subscribed to newsletter' }),
       {

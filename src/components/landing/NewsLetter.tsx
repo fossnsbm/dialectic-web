@@ -3,14 +3,16 @@ import React, { useState } from 'react'
 import { Button } from 'components/common/buttons/'
 import { Input } from '@/components/ui/input'
 import { Container } from '../common'
+import { set } from 'mongoose'
+import { toast } from '../ui/use-toast'
 
 const NewsLetter = () => {
   const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault() // Prevent the default form submission behavior
-
+    e.preventDefault()
+    setLoading(true)
     try {
       const response = await fetch('/api/auth/newsletter', {
         method: 'POST',
@@ -19,16 +21,32 @@ const NewsLetter = () => {
         },
         body: JSON.stringify({ email }),
       })
+      const result = await response.json()
 
       if (response.ok) {
-        setMessage('Successfully subscribed!')
-        setEmail('') // Clear input
+        toast({
+          title: 'Subcribe Successful',
+          description: 'You have successfully subscribed to our newsletter.',
+        })
+
+        setEmail('')
+        setLoading(false)
       } else {
-        setMessage('Subscription failed. Please try again.')
+        toast({
+          title: 'Failed',
+          description: result.message || 'An error occurred during login.',
+        })
+
+        setLoading(false)
       }
     } catch (error) {
-      console.error('Subscription error:', error)
-      setMessage('An error occurred. Please try again.')
+      toast({
+        title: 'Login Failed',
+        description:
+          (error as Error).message || 'An error occurred during login.',
+      })
+      setEmail('')
+      setLoading(false)
     }
   }
 
@@ -59,15 +77,10 @@ const NewsLetter = () => {
                 required
               />
               <Button variant={'black'} type="submit" className="flex">
-                Subscribe
+                {loading ? 'Subscribing...' : 'Subscribe'}
               </Button>
             </form>
           </div>
-          {message && (
-            <div className="text-center mt-4 text-sm text-gray-500">
-              {message}
-            </div>
-          )}
         </div>
       </Container>
     </div>
