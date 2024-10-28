@@ -83,7 +83,7 @@ export default function DashboardLayout({
       <Sidebaradmin />
       <main className="flex-1 flex flex-col w-full">
         <Headeradmin />
-        <div className="pl-0 md:pl-[310px]">{children}</div>
+        <div className="pl-0 md:pl-[310px] pt-10">{children}</div>
       </main>
     </div>
   )

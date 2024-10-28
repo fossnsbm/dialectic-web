@@ -21,18 +21,18 @@ const Episode_card = () => {
             src="/images/man.png"
             alt="man"
             className="border rounded-lg"
-            width={400}
-            height={400}
+            width={200}
+            height={200}
           ></Image>
         </div>
         <div>Speaker Name</div>
         <div>Position</div>
       </div>
-      <div className="flex flex-col sm:items-start justify-center sm:gap-10 gap-4 max-w-auto text-justify">
+      <div className="flex flex-col sm:items-start justify-center sm:gap-4 gap-4 max-w-auto text-justify">
         <div className="font-semibold text-xl">
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </div>
-        <div className=" text-gray-400">
+        <div className=" text-gray-900">
           Episode 08 | 11th November 2023 | 27 min
         </div>
         <div className="sm:block hidden">
