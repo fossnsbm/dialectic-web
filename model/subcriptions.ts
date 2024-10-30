@@ -5,14 +5,14 @@ const SubscriptionSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true, // Ensure each email is unique
+    unique: true,
     lowercase: true,
     trim: true,
     timeStamp: true,
   },
   createdAt: {
     type: Date,
-    default: Date.now, // Set default creation date
+    default: Date.now,
   },
 })
 

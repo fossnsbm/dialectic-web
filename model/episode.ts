@@ -11,11 +11,11 @@ const SubscriptionSchema = new mongoose.Schema({
   },
   episodenumber: {
     type: Number,
-    required: true,
+    required: true, // auto genarate
   },
   date: {
     type: Date,
-    required: true,
+    required: true, // date auto
   },
   duration: {
     type: Number,

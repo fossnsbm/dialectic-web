@@ -10,44 +10,45 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
-import { Slider } from '@/components/ui/slider'
+import { Button } from '@/components/common/buttons'
 import { useState } from 'react'
-import { set } from 'zod'
+import { Label } from '@radix-ui/react-dropdown-menu'
+import { Input } from '@/components/ui/input'
 
 export default function SignUpDialog() {
   const [values, setValues] = useState([15000, 100000])
   const [step, setStep] = useState(1)
-
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [uploadStatus, setUploadStatus] = useState('')
   const [formData, setFormData] = useState({
     title: '',
-    salary: '',
-    employmentTypes: [],
+    position: '',
+    duration: '',
     description: '',
     location: '',
     company: '',
   })
-  const clearinputs = () => {
+
+  const clearInputs = () => {
     setFormData({
       title: '',
-      salary: '',
-      employmentTypes: [],
+      position: '',
+      duration: '',
       description: '',
       location: '',
       company: '',
     })
-
+    setSelectedFile(null)
+    setUploadStatus('')
     setStep(1)
   }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target
-    if (type === 'checkbox') {
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      })
-    }
+    const { name, value } = e.target
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
   }
 
   const handleNext = (e: React.FormEvent) => {
@@ -57,9 +58,51 @@ export default function SignUpDialog() {
     }
   }
 
-  const handlePrevious = () => {
+  const handlePrevious = (e: React.FormEvent) => {
+    e.preventDefault()
     if (step > 1) {
       setStep(step - 1)
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log(formData)
+
+    // Here you can also handle the file upload if necessary
+    await handleUpload()
+  }
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setSelectedFile(event.target.files[0])
+    }
+    setUploadStatus('')
+  }
+
+  const handleUpload = async () => {
+    if (!selectedFile) {
+      setUploadStatus('Please select a file first!')
+      return
+    }
+
+    const formData = new FormData()
+    formData.append('file', selectedFile)
+
+    try {
+      const response = await fetch('YOUR_API_URL', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (response.ok) {
+        setUploadStatus('File uploaded successfully!')
+      } else {
+        setUploadStatus('File upload failed!')
+      }
+    } catch (error) {
+      setUploadStatus('An error occurred while uploading the file.')
+      console.error('Upload error:', error)
     }
   }
 
@@ -71,160 +114,123 @@ export default function SignUpDialog() {
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
-        <form>
+        <form onSubmit={handleSubmit}>
           <AlertDialogHeader>
-            <AlertDialogTitle>Add Jobs Here</AlertDialogTitle>
+            <AlertDialogTitle>Add Episode Here</AlertDialogTitle>
             <AlertDialogDescription>
-              Please fill out the form to add your job details.
+              Please fill out the form to add your episode details.
             </AlertDialogDescription>
           </AlertDialogHeader>
 
           <div className="flex flex-col gap-4 p-4">
             {step === 1 && (
-              <>
-                <label htmlFor="title" className="text-sm">
-                  Job Title
-                </label>
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
+              <div className="flex flex-col">
+                <div className="text-lg font-semibold flex flex-start ">
+                  Upload Speaker Picture
+                </div>
+                <Input
+                  type="file"
+                  onChange={handleFileChange}
+                  className="hidden"
+                  id="fileInput"
                   required
-                  className="border p-2 rounded"
                 />
-
-                <label htmlFor="employmentTypes" className="text-sm">
-                  Type of Employment
+                <label
+                  htmlFor="fileInput"
+                  className="px-6 py-2 bg-gray-0  h-72 text-white rounded-lg cursor-pointer font-semibold hover:bg-green-600 transition flex justify-center border-2 border-dotted border-blue-800 items-center hover:bg-blue-50"
+                >
+                  {selectedFile ? 'Change File' : 'Choose File'}
                 </label>
-                <div className="flex flex-col gap-2">
-                  {[
-                    'Full-Time',
-                    'Part-Time',
-                    'Remote',
-                    'Internship',
-                    'Contract',
-                  ].map((type) => (
-                    <label key={type}>
-                      <input
-                        type="checkbox"
-                        name="employmentTypes"
-                        value={type}
-                        onChange={handleChange}
-                      />
-                      {type}
-                    </label>
-                  ))}
-                </div>
-
-                <div>
-                  <label htmlFor="salary" className="text-sm">
-                    Salary
-                  </label>
-
-                  <div style={{ width: '300px', margin: '20px auto' }}>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        marginBottom: '8px',
-                      }}
-                    >
-                      <input
-                        type="text"
-                        value={`Rs. ${values[0].toLocaleString()}`}
-                        readOnly
-                        style={{
-                          border: 'none',
-                          width: '80px',
-                          textAlign: 'center',
-                          background: 'transparent',
-                        }}
-                      />
-                      <span>to</span>
-                      <input
-                        type="text"
-                        value={`Rs. ${values[1].toLocaleString()}`}
-                        readOnly
-                        style={{
-                          border: 'none',
-                          width: '80px',
-                          textAlign: 'center',
-                          background: 'transparent',
-                        }}
-                      />
-                    </div>
-                    <Slider
-                      value={values}
-                      onValueChange={(newValue: number[]) =>
-                        setValues(newValue)
-                      }
-                      min={15000}
-                      max={700000}
-                      style={{ color: '#5F3FF3' }}
-                    />
+                {selectedFile && (
+                  <div className="text-sm text-red-800">
+                    Selected File: {selectedFile.name}
                   </div>
-                </div>
-              </>
+                )}
+                <div className="text-sm text-gray-700">{uploadStatus}</div>
+              </div>
             )}
 
             {step === 2 && (
               <>
-                <label htmlFor="description" className="text-sm">
-                  Job Description
-                </label>
-                <textarea
-                  id="description"
-                  name="description"
-                  value={formData.description}
-                  required
-                  className="border p-2 rounded"
-                />
-
-                <label htmlFor="location" className="text-sm">
-                  Location
-                </label>
-                <input
-                  type="text"
-                  id="location"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                  required
-                  className="border p-2 rounded"
-                />
-
-                <label htmlFor="company" className="text-sm">
-                  Company Name
-                </label>
-                <input
-                  type="text"
-                  id="company"
-                  name="company"
-                  value={formData.company}
-                  onChange={handleChange}
-                  required
-                  className="border p-2 rounded"
-                />
+                <div>
+                  <Label>Speaker Name</Label>
+                  <Input
+                    name="title"
+                    value={formData.title}
+                    onChange={handleChange}
+                    placeholder="Enter speaker name"
+                    required
+                  />
+                </div>
+                <div>
+                  <Label>Speaker Position</Label>
+                  <Input
+                    name="position"
+                    value={formData.position}
+                    onChange={handleChange}
+                    placeholder="Enter position"
+                    required
+                  />
+                </div>
               </>
             )}
 
             {step === 3 && (
-              <>
-                <p>jkfhwkefhb</p>
-              </>
+              <div className="flex gap-5 flex-col">
+                <div>
+                  <Label>Episode Title</Label>
+                  <Input
+                    name="title"
+                    value={formData.title}
+                    onChange={handleChange}
+                    placeholder="Enter episode title"
+                    required
+                  />
+                </div>
+                <div>
+                  <Label>Duration (min)</Label>
+                  <Input
+                    name="duration"
+                    value={formData.duration}
+                    onChange={handleChange}
+                    placeholder="Enter duration"
+                    required
+                  />
+                </div>
+                <div>
+                  <Label>Description</Label>
+                  <Input
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    placeholder="Enter description"
+                    required
+                  />
+                </div>
+              </div>
             )}
           </div>
 
           <AlertDialogFooter>
-            <AlertDialogCancel type="button" onClick={clearinputs}>
-              Cancel
-            </AlertDialogCancel>
-            {step > 1 && <Button onClick={handlePrevious}>Previous</Button>}
-            <AlertDialogAction onClick={handleNext}>
-              {step < 3 ? 'Next' : 'Submit'}
-            </AlertDialogAction>
+            <div className="flex gap-9">
+              <AlertDialogCancel type="button" onClick={clearInputs}>
+                Cancel
+              </AlertDialogCancel>
+              {step > 1 && (
+                <Button className="h-9" type="button" onClick={handlePrevious}>
+                  Previous
+                </Button>
+              )}
+              {step < 3 ? (
+                <Button className="h-9" type="button" onClick={handleNext}>
+                  Next
+                </Button>
+              ) : (
+                <Button className="h-9" type="submit">
+                  Submit
+                </Button>
+              )}
+            </div>
           </AlertDialogFooter>
         </form>
       </AlertDialogContent>
