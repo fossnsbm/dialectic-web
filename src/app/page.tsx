@@ -11,7 +11,7 @@ import {
 import EpisodeSection from '@/components/landing/Episode_section'
 import Popular_ep_sec from '@/components/landing/popular_epi_sec'
 
-const Home: React.FC = () => {
+function home() {
   return (
     <div>
       <Navigation />
@@ -28,4 +28,4 @@ const Home: React.FC = () => {
   )
 }
 
-export default Home
+export default home

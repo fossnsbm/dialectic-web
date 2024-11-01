@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "npx tsc --noEmit && next lint",
-    "postinstall": "yarn husky install && npm install -g @commitlint/cli @commitlint/config-conventional && chmod u+x ./.husky/commit-msg && chmod u+x ./.husky/pre-commit",
+    "postinstall": "if [ -d .git ]; then yarn husky install && yarn global add @commitlint/cli @commitlint/config-conventional && chmod u+x ./.husky/commit-msg && chmod u+x ./.husky/pre-commit; fi",
     "commitlint": "commitlint --edit"
   },
   "lint-staged": {

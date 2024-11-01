@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  client:
+    build: .
+    container_name: root_dialectic
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - client_node_modules:/app/node_modules  
+    environment:
+      - JWT_SECRET=8b7ff387a73860967810a5c4df034edc06796507d8e3b18d307887013e8953a5c62a7cc23eedfab85909d81bea0aff3202f8d7759e3e4f0a9a44a270ff614ce5
+      - MONGO_URI=mongodb+srv://Recruitwise:groupproject@recruitwise.us4pdz2.mongodb.net/dialectic
+
+volumes:
+  client_node_modules:  
