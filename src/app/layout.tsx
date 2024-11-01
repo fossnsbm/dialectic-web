@@ -1,3 +1,4 @@
+import React from 'react'
 import type { Metadata } from 'next'
 import { inter, quicksand } from '@/styles/fonts'
 import '@/styles/globals.css'
@@ -19,8 +20,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${quicksand.variable} ${inter.variable}`}>
-        <Savedbar />
-        <Navigation />
         {children}
         <Toaster />
       </body>

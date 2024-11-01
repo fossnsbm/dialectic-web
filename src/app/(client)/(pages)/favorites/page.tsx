@@ -9,6 +9,7 @@ import { Container } from '@/components/common'
 const Favorites = () => {
   return (
     <div>
+      <Navigation />
       <Container>
         <div className="w-full flex md:flex-row flex-col items-center justify-between ">
           <div className=" flex text-[64px]  ">Favorites</div>
