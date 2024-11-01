@@ -9,6 +9,7 @@ import Navigation from 'components/common/layout/navigation'
 const Allepisode = () => {
   return (
     <div>
+      <Navigation />
       <Container>
         <div className="w-full flex md:flex-row flex-col items-center justify-between ">
           <div className=" flex text-[64px]  ">All Episode</div>
