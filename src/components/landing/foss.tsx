@@ -3,7 +3,7 @@ import Image from 'next/image'
 import FOSS_Pictures from '/public/images/FOSS pictures.png'
 import { Button } from 'components/common/buttons'
 import { Containerf } from 'components/common/'
-
+import Link from 'next/link'
 const foss = () => {
   return (
     <Containerf>
@@ -27,7 +27,9 @@ const foss = () => {
             obcaecati nisi odit, suscipit velit adipisci.
           </div>
           <div>
-            <Button>Keep in Touch with us</Button>
+            <Link href="https://www.fossnsbm.org/" passHref>
+              <Button>Keep in Touch with us</Button>
+            </Link>
           </div>
         </div>
 

@@ -44,7 +44,7 @@ export async function POST(req: Request) {
     })
 
     return new Response(
-      JSON.stringify({ token, redirectUrl: '/admin/overview' }),
+      JSON.stringify({ token, redirectUrl: '/admin/addepisode' }),
       { status: 200 },
     )
   } catch (error) {
