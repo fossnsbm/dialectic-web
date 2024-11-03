@@ -7,6 +7,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { Footer, Navigation, Savedbar } from '@/components/common'
 import NewsLetter from '@/components/landing/NewsLetter'
 import { Toaster } from '@/components/ui/toaster'
+import '@/styles/loading.css'
 export const metadata: Metadata = {
   title: 'Dialectic',
   description: main.description,

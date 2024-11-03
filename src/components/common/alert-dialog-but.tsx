@@ -134,6 +134,7 @@ export default function SignUpDialog() {
       if (response.ok) {
         clearInputs()
         setLoading(false)
+        window.location.reload()
       } else {
         alert('Failed to add episode!')
         setLoading(false)

@@ -7,14 +7,17 @@ import Cards from '@/components/common/Episode_cardadmin'
 
 interface Episode {
   _id: string
+  createdAt: string // Assuming you have a createdAt property in your episode object
 }
 
 const UserClient = () => {
   const [episodes, setEpisodes] = useState<Episode[]>([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const fetchEpisodes = async () => {
       try {
+        setLoading(true)
         const response = await fetch('/api/episode/allepisodes', {
           method: 'GET',
           headers: {
@@ -27,14 +30,30 @@ const UserClient = () => {
         }
 
         const data: Episode[] = await response.json()
-        setEpisodes(data)
+
+        const sortedEpisodes = data.sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+        )
+
+        setEpisodes(sortedEpisodes)
+        setLoading(false)
       } catch (error) {
         console.error('Error fetching episodes:', error)
+        setLoading(false)
       }
     }
 
     fetchEpisodes()
   }, [])
+
+  if (loading) {
+    return (
+      <div className="h-screen flex justify-center items-center text-blue-200 text-3xl bold">
+        Loading...
+      </div>
+    )
+  }
 
   return (
     <>

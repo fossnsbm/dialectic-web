@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
   await connectToDatabase()
 
   try {
-    const ids = await EpisodeModel.find({}).select('_id')
+    const ids = await EpisodeModel.find({}).select('_id createdAt')
     return NextResponse.json(ids, { status: 200 })
   } catch (error) {
     console.error('Error fetching IDs from the database:', error)
