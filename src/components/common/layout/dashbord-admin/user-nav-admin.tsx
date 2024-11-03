@@ -31,7 +31,7 @@ export default function UserNav() {
               sessionStorage.removeItem('role')
               localStorage.removeItem('token')
               sessionStorage.removeItem('token')
-              window.location.reload()
+              window.location.href = '/'
             }}
           >
             Log out

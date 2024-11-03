@@ -30,12 +30,6 @@ export type Employee = {
 
 export const navItemadmin: NavItemadmin[] = [
   {
-    title: 'Overview',
-    href: '/admin/overview',
-    icon: 'dashboard',
-    label: 'Overview',
-  },
-  {
     title: 'Add Episode',
     href: '/admin/addepisode',
     icon: 'user',
@@ -44,6 +38,12 @@ export const navItemadmin: NavItemadmin[] = [
   {
     title: 'Settings',
     href: '/admin/settings',
+    icon: 'user',
+    label: 'Settings',
+  },
+  {
+    title: 'addCards',
+    href: '/admin/addCards',
     icon: 'user',
     label: 'Settings',
   },

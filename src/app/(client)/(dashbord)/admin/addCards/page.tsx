@@ -1,7 +1,7 @@
 import React from 'react'
 
 function page() {
-  return <div>overview</div>
+  return <div>add card</div>
 }
 
 export default page
