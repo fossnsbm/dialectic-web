@@ -20,7 +20,7 @@ function home() {
       <Latest_ep />
       <EpisodeSection />
       <FOSS_section />
-      <Episode_card />
+
       <Logos />
       <Newsletter_section />
       <Footer />
