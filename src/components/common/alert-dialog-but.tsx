@@ -22,20 +22,20 @@ export default function SignUpDialog() {
   const [uploadStatus, setUploadStatus] = useState('')
   const [formData, setFormData] = useState({
     title: '',
-    position: '',
+    speakerposition: '',
     duration: '',
-    description: '',
-    location: '',
+    describe: '',
+    speakername: '',
     company: '',
   })
 
   const clearInputs = () => {
     setFormData({
       title: '',
-      position: '',
+      speakerposition: '',
       duration: '',
-      description: '',
-      location: '',
+      describe: '',
+      speakername: '',
       company: '',
     })
     setSelectedFile(null)
@@ -64,15 +64,6 @@ export default function SignUpDialog() {
       setStep(step - 1)
     }
   }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log(formData)
-
-    // Here you can also handle the file upload if necessary
-    await handleUpload()
-  }
-
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       setSelectedFile(event.target.files[0])
@@ -90,7 +81,7 @@ export default function SignUpDialog() {
     formData.append('file', selectedFile)
 
     try {
-      const response = await fetch('YOUR_API_URL', {
+      const response = await fetch('/api/episode/upload', {
         method: 'POST',
         body: formData,
       })
@@ -100,9 +91,53 @@ export default function SignUpDialog() {
       } else {
         setUploadStatus('File upload failed!')
       }
+
+      const data = await response.json()
+      console.log('Upload response:', data.url)
+      return data.url
     } catch (error) {
       setUploadStatus('An error occurred while uploading the file.')
       console.error('Upload error:', error)
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log(formData)
+    console.log('Uploading file...')
+
+    const speakerprofilepicurl = await handleUpload()
+    if (!speakerprofilepicurl) return
+
+    console.log('File uploaded...')
+
+    const { title, speakerposition, duration, describe, speakername } = formData
+
+    try {
+      const response = await fetch('/api/episode/addepisode', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title,
+          speakerposition,
+          duration,
+          describe,
+          speakername,
+          speakerprofilepicurl,
+        }),
+      })
+
+      if (response.ok) {
+        alert('Episode added successfully!')
+        clearInputs()
+      } else {
+        alert('Failed to add episode!')
+      }
+    } catch (error) {
+      console.error('Error adding episode:', error)
+      alert('An error occurred while adding the episode.')
     }
   }
 
@@ -132,6 +167,7 @@ export default function SignUpDialog() {
                   type="file"
                   onChange={handleFileChange}
                   className="hidden"
+                  name="speakerprofilepic"
                   id="fileInput"
                   required
                 />
@@ -155,8 +191,8 @@ export default function SignUpDialog() {
                 <div>
                   <Label>Speaker Name</Label>
                   <Input
-                    name="title"
-                    value={formData.title}
+                    name="speakername"
+                    value={formData.speakername}
                     onChange={handleChange}
                     placeholder="Enter speaker name"
                     required
@@ -165,8 +201,8 @@ export default function SignUpDialog() {
                 <div>
                   <Label>Speaker Position</Label>
                   <Input
-                    name="position"
-                    value={formData.position}
+                    name="speakerposition"
+                    value={formData.speakerposition}
                     onChange={handleChange}
                     placeholder="Enter position"
                     required
@@ -200,8 +236,8 @@ export default function SignUpDialog() {
                 <div>
                   <Label>Description</Label>
                   <Input
-                    name="description"
-                    value={formData.description}
+                    name="describe"
+                    value={formData.describe}
                     onChange={handleChange}
                     placeholder="Enter description"
                     required
