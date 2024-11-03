@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import { describe } from 'node:test'
 import { date } from 'zod'
 
-const SubscriptionSchema = new mongoose.Schema({
+const episodeSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -12,10 +12,6 @@ const SubscriptionSchema = new mongoose.Schema({
   episodenumber: {
     type: Number,
     required: true, // auto genarate
-  },
-  date: {
-    type: Date,
-    required: true, // date auto
   },
   duration: {
     type: Number,
@@ -45,6 +41,6 @@ const SubscriptionSchema = new mongoose.Schema({
 })
 
 // Create the Subscription model
-const Subscription = mongoose.model('Subscription', SubscriptionSchema)
+const Subscription = mongoose.model('episodes', episodeSchema)
 
 export default Subscription
