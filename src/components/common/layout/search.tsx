@@ -3,7 +3,8 @@ import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'
 import SearchIcon from '@mui/icons-material/Search'
 import Containerf from '../containerf'
-const Searchq = () => {
+
+const Searchq: React.FC<SearchqProps> = () => {
   return (
     <>
       <div className="flex">
