@@ -1,17 +1,9 @@
-import { time, timeStamp } from 'console'
-import { Speaker } from 'lucide-react'
 import mongoose from 'mongoose'
-import { describe } from 'node:test'
-import { date } from 'zod'
 
 const episodeSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-  },
-  episodenumber: {
-    type: Number,
-    required: true, // auto genarate
   },
   duration: {
     type: Number,
@@ -29,18 +21,18 @@ const episodeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  speakerprofilepic: {
+  speakerprofilepicurl: {
     type: String,
     required: true,
   },
-
   createdAt: {
     type: Date,
     default: Date.now, // Set default creation date
   },
 })
 
-// Create the Subscription model
-const Subscription = mongoose.model('episodes', episodeSchema)
+// Check if the model already exists to prevent overwriting
+const Episode =
+  mongoose.models.Episode || mongoose.model('Episode', episodeSchema)
 
-export default Subscription
+export default Episode

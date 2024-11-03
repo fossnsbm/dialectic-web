@@ -20,6 +20,7 @@ export default function SignUpDialog() {
   const [step, setStep] = useState(1)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [uploadStatus, setUploadStatus] = useState('')
+  const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     title: '',
     speakerposition: '',
@@ -103,6 +104,7 @@ export default function SignUpDialog() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setLoading(true)
     console.log(formData)
     console.log('Uploading file...')
 
@@ -130,14 +132,16 @@ export default function SignUpDialog() {
       })
 
       if (response.ok) {
-        alert('Episode added successfully!')
         clearInputs()
+        setLoading(false)
       } else {
         alert('Failed to add episode!')
+        setLoading(false)
       }
     } catch (error) {
       console.error('Error adding episode:', error)
       alert('An error occurred while adding the episode.')
+      setLoading(false)
     }
   }
 
@@ -263,7 +267,7 @@ export default function SignUpDialog() {
                 </Button>
               ) : (
                 <Button className="h-9" type="submit">
-                  Submit
+                  {loading ? 'Adding...' : 'Add Episode'}
                 </Button>
               )}
             </div>
