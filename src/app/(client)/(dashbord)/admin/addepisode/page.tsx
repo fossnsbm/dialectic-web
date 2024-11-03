@@ -49,8 +49,8 @@ const UserClient = () => {
 
   if (loading) {
     return (
-      <div className="h-screen flex justify-center items-center text-blue-200 text-3xl bold">
-        Loading...
+      <div className="h-screen flex justify-center items-center ">
+        <span className="loader"></span>
       </div>
     )
   }
@@ -58,7 +58,10 @@ const UserClient = () => {
   return (
     <>
       <div className="flex items-start justify-between">
-        <Heading title={`Total Episodes`} description={''} />
+        <Heading
+          title={`Total Episodes: 0${episodes.length}`}
+          description={''}
+        />
         <AlertDialogDemo />
       </div>
       <div className="pt-7">

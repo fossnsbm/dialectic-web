@@ -65,11 +65,44 @@ export default function SignUpDialog() {
       setStep(step - 1)
     }
   }
+
+  const REQUIRED_WIDTH = 240
+  const REQUIRED_HEIGHT = 232
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
-      setSelectedFile(event.target.files[0])
+      const file = event.target.files[0]
+
+      const img = new Image()
+      const objectUrl = URL.createObjectURL(file)
+
+      img.onload = () => {
+        if (img.width === REQUIRED_WIDTH && img.height === REQUIRED_HEIGHT) {
+          setSelectedFile(file)
+          setUploadStatus('')
+        } else {
+          setUploadStatus(
+            `Image must be exactly ${REQUIRED_WIDTH}x${REQUIRED_HEIGHT} pixels.`,
+          )
+          setSelectedFile(null)
+        }
+
+        URL.revokeObjectURL(objectUrl)
+      }
+
+      img.onerror = () => {
+        setUploadStatus(
+          'Error loading image. Please select a valid image file.',
+        )
+        setSelectedFile(null)
+        URL.revokeObjectURL(objectUrl)
+      }
+
+      img.src = objectUrl
+    } else {
+      setUploadStatus('Please select a valid image file.')
+      setSelectedFile(null)
     }
-    setUploadStatus('')
   }
 
   const handleUpload = async () => {

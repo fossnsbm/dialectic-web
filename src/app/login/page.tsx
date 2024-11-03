@@ -83,7 +83,7 @@ export default function JoySignInSideTemplate() {
     return (
       <div>
         <div className="flex items-center justify-center min-h-screen">
-          <span className="loader">loading....</span>
+          <span className="loader"></span>
         </div>
       </div>
     )
