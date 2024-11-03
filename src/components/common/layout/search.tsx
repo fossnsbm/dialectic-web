@@ -4,7 +4,7 @@ import { Search } from 'lucide-react'
 import SearchIcon from '@mui/icons-material/Search'
 import Containerf from '../containerf'
 
-const Searchq: React.FC<SearchqProps> = () => {
+const Searchq = () => {
   return (
     <>
       <div className="flex">
