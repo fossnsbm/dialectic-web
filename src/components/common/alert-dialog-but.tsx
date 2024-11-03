@@ -16,7 +16,6 @@ import { Label } from '@radix-ui/react-dropdown-menu'
 import { Input } from '@/components/ui/input'
 
 export default function SignUpDialog() {
-  const [values, setValues] = useState([15000, 100000])
   const [step, setStep] = useState(1)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [uploadStatus, setUploadStatus] = useState('')
@@ -27,7 +26,7 @@ export default function SignUpDialog() {
     duration: '',
     describe: '',
     speakername: '',
-    company: '',
+    youtubecode: '',
   })
 
   const clearInputs = () => {
@@ -37,7 +36,7 @@ export default function SignUpDialog() {
       duration: '',
       describe: '',
       speakername: '',
-      company: '',
+      youtubecode: '',
     })
     setSelectedFile(null)
     setUploadStatus('')
@@ -146,7 +145,14 @@ export default function SignUpDialog() {
 
     console.log('File uploaded...')
 
-    const { title, speakerposition, duration, describe, speakername } = formData
+    const {
+      title,
+      speakerposition,
+      duration,
+      describe,
+      speakername,
+      youtubecode,
+    } = formData
 
     try {
       const response = await fetch('/api/episode/addepisode', {
@@ -161,6 +167,7 @@ export default function SignUpDialog() {
           describe,
           speakername,
           speakerprofilepicurl,
+          youtubecode,
         }),
       })
 
@@ -278,6 +285,16 @@ export default function SignUpDialog() {
                     value={formData.describe}
                     onChange={handleChange}
                     placeholder="Enter description"
+                    required
+                  />
+                </div>
+                <div>
+                  <Label>Youtubecode</Label>
+                  <Input
+                    name="youtubecode"
+                    value={formData.youtubecode}
+                    onChange={handleChange}
+                    placeholder="Enter code"
                     required
                   />
                 </div>

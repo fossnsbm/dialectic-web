@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs/promises'
 
 export async function POST(req: NextRequest) {
-  // Check if the request method is POST
   if (req.method !== 'POST') {
     return NextResponse.json(
       { error: `Method ${req.method} Not Allowed` },
@@ -19,7 +18,8 @@ export async function POST(req: NextRequest) {
     describe,
     speakername,
     speakerprofilepicurl,
-    blobFilePath, // Assume you have a blob file path included in the request
+    blobFilePath,
+    youtubecode,
   } = await req.json()
 
   if (
@@ -28,7 +28,8 @@ export async function POST(req: NextRequest) {
     !duration ||
     !describe ||
     !speakername ||
-    !speakerprofilepicurl
+    !speakerprofilepicurl ||
+    !youtubecode
   ) {
     return NextResponse.json(
       { error: 'All fields are required.' },
@@ -48,12 +49,10 @@ export async function POST(req: NextRequest) {
       describe,
       speakername,
       speakerprofilepicurl,
+      youtubecode,
     })
 
-    // Save the new episode
     const savedEpisode = await newEpisode.save()
-
-    // Respond with success
     return NextResponse.json(
       { message: 'Episode added successfully!', episode: savedEpisode },
       { status: 201 },
@@ -61,7 +60,6 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error('Error adding episode:', error)
 
-    // Attempt to remove the blob file if it exists
     if (blobFilePath) {
       try {
         await fs.unlink(blobFilePath)
