@@ -2,16 +2,17 @@
 FROM node:20-alpine 
 
 # Install Git, as Husky requires it
-RUN apk add --no-cache git
 
 # Set the working directory inside the container
 WORKDIR /app
 
+RUN yarn cache clean
 # Copy package.json and yarn.lock files
-COPY package.json ./
+COPY package.json yarn.lock ./
+
 
 # Install dependencies
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 # Copy the rest of the application code
 COPY . .
