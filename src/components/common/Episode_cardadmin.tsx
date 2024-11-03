@@ -44,10 +44,10 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
 
         setEpisodeData({
           speakerImage: data.speakerprofilepicurl || '/images/man.png', // Use the default image
-          speakerName: data.speakerName || 'John Doe', // Use the default name
+          speakerName: data.speakername || 'John Doe', // Use the default name
           speakerPosition: data.speakerposition || 'Software Engineer', // Use the default position
           episodeTitle: data.title || 'Episode Title', // Use the default title
-          episodeDate: data.episodeDate || '2022-01-01',
+          episodeDate: data.createdAt || '2022-01-01',
           episodeDuration: data.duration || '1:00:00',
           episodeDescription:
             data.describe || 'This is a description of the episode.', // Use the default description
@@ -86,7 +86,7 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
           {episodeData.episodeTitle} {/* Render the actual episode title */}
         </div>
         <div className="text-gray-900">
-          Episode | {episodeData.episodeDate} | {episodeData.episodeDuration}{' '}
+          Episode | {episodeData.episodeDate} | {episodeData.episodeDuration}min{' '}
           {/* Render actual data */}
         </div>
         <div className="sm:block hidden">
