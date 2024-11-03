@@ -55,6 +55,31 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
     }
   }
 
+  const haddledelete = async () => {
+    const isConfirmed = window.confirm(
+      'Are you sure you want to delete this item?',
+    )
+
+    if (!isConfirmed) {
+      return
+    }
+
+    const response = await fetch('/api/episode/crud/delete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ _id }),
+    })
+
+    const data = await response.json()
+    if (data) {
+      window.location.reload()
+    }
+
+    console.log(data)
+  }
+
   useEffect(() => {
     const fetchEpisodeData = async () => {
       try {
@@ -133,7 +158,11 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
               <PlayIcon />
             </div>
           </Button>
-          <Button variant={'secondary'} className="gap-2">
+          <Button
+            variant={'secondary'}
+            className="gap-2"
+            onClick={haddledelete}
+          >
             <div>Delete</div>
           </Button>
         </div>
@@ -141,9 +170,9 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
       <Dialog
         open={isModalOpen}
         onClose={closeModal}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-65 "
       >
-        <Dialog.Panel className="relative w-full max-w-3xl p-4">
+        <Dialog.Panel className="relative w-full max-w-4xl p-4 ">
           <Button
             className="absolute top-2 right-2 text-gray-500 z-10"
             onClick={closeModal}
@@ -151,7 +180,7 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
             ✖
           </Button>
 
-          <div className="relative w-full" style={{ paddingTop: '86.25%' }}>
+          <div className="relative w-full " style={{ paddingTop: '86.25%' }}>
             <iframe
               className="absolute top-0 left-0 w-full h-full"
               src={youtubeLinkplay}

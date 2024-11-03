@@ -1,11 +1,13 @@
-import React from 'react'
+'use client'
+import React, { use } from 'react'
 import { Button, Container, Containerf } from '../common'
 import '../../styles/fonts/fonts'
-
+import { useRouter } from 'next/navigation'
 // images
 import Image from 'next/image'
 
 const hero = () => {
+  const Router = useRouter()
   return (
     <Container>
       <div className="flex md:flex-row flex-col gap-4 items-center justify-center  text-gray-900 text-lg font-   py-10">
@@ -31,7 +33,13 @@ const hero = () => {
             sem convallis condimentum.
           </div>
           <div>
-            <Button variant={'blue'} size={'lg'}>
+            <Button
+              variant={'blue'}
+              size={'lg'}
+              onClick={() => {
+                Router.push('/episodes')
+              }}
+            >
               Browse Podcast &gt;
             </Button>
           </div>

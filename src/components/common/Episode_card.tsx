@@ -136,20 +136,14 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
               <Share />
             </div>
           </Button>
-          <Button variant={'white-outline-2'} className="gap-2">
-            <div>Save</div>
-            <div>
-              <PlayIcon />
-            </div>
-          </Button>
         </div>
       </div>
       <Dialog
         open={isModalOpen}
         onClose={closeModal}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+        className="fixed inset-0 z-50 flex items-center justify-center  bg-gray-900 bg-opacity-65"
       >
-        <Dialog.Panel className="relative w-full max-w-3xl p-3">
+        <Dialog.Panel className="relative w-full max-w-4xl p-3">
           <Button
             className="absolute top-2 right-2 text-gray-500 z-10"
             onClick={closeModal}
