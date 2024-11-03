@@ -1,4 +1,6 @@
+import { youTube } from '@/constants'
 import mongoose from 'mongoose'
+import { string } from 'zod'
 
 const episodeSchema = new mongoose.Schema({
   title: {
@@ -22,6 +24,10 @@ const episodeSchema = new mongoose.Schema({
     required: true,
   },
   speakerprofilepicurl: {
+    type: String,
+    required: true,
+  },
+  youtubecode: {
     type: String,
     required: true,
   },

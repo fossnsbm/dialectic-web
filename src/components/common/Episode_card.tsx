@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Containerf from 'components/common/containerf'
 import Man from '/images/man.png'
 import { Button } from 'components/common/buttons'
+import { Dialog } from '@headlessui/react'
 import {
   BluetoothConnected,
   PlaneIcon,
@@ -20,6 +21,7 @@ interface EpisodeData {
   episodeDate: string
   episodeDuration: string
   episodeDescription: string
+  youtubecode: string
 }
 interface CardsProps {
   id: string
@@ -28,6 +30,30 @@ interface CardsProps {
 const Episode_card: React.FC<CardsProps> = ({ id }) => {
   const [episodeData, setEpisodeData] = useState<EpisodeData | null>(null)
   const _id = id
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const openModal = () => setIsModalOpen(true)
+  const closeModal = () => setIsModalOpen(false)
+  const youtubeLinkplay = `https://www.youtube.com/embed/${episodeData?.youtubecode}`
+  const shareEpisode = async () => {
+    const youtubeLink = `https://www.youtube.com/watch?v=${episodeData?.youtubecode}`
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Check out this YouTube video!',
+          url: youtubeLink,
+        })
+        console.log('Successfully shared!')
+      } catch (error) {
+        console.error('Error sharing:', error)
+      }
+    } else {
+      const fallbackMessage = `Check out this YouTube video: ${youtubeLink}`
+      navigator.clipboard.writeText(fallbackMessage).then(() => {
+        alert('Link copied to clipboard! You can paste it to share.')
+      })
+    }
+  }
 
   useEffect(() => {
     const fetchEpisodeData = async () => {
@@ -50,7 +76,8 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
           episodeDate: data.createdAt || '2022-01-01',
           episodeDuration: data.duration || '1:00:00',
           episodeDescription:
-            data.describe || 'This is a description of the episode.', // Use the default description
+            data.describe || 'This is a description of the episode.',
+          youtubecode: data.youtubecode,
         })
       } catch (error) {
         console.error('Failed to fetch episode data:', error)
@@ -93,26 +120,49 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
           {episodeData.episodeDescription} {/* Render the actual description */}
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-center sm:gap-10 gap-4">
-          <Button className="gap-2">
+          <Button className="gap-2" onClick={openModal}>
             <div>Listen Now</div>
             <div>
               <PlayCircle />
             </div>
           </Button>
-          <Button variant={'white-outline-2'} className="gap-2">
+          <Button
+            variant={'white-outline-2'}
+            onClick={shareEpisode}
+            className="gap-2"
+          >
             <div>Share</div>
             <div>
               <Share />
             </div>
           </Button>
-          <Button variant={'white-outline-2'} className="gap-2">
-            <div>Save</div>
-            <div>
-              <PlayIcon />
-            </div>
-          </Button>
         </div>
       </div>
+      <Dialog
+        open={isModalOpen}
+        onClose={closeModal}
+        className="fixed inset-0 z-50 flex items-center justify-center  bg-gray-900 bg-opacity-65"
+      >
+        <Dialog.Panel className="relative w-full max-w-4xl p-3">
+          <Button
+            className="absolute top-2 right-2 text-gray-500 z-10"
+            onClick={closeModal}
+          >
+            ✖
+          </Button>
+
+          <div className="relative w-full" style={{ paddingTop: '86.25%' }}>
+            <iframe
+              className="absolute top-0 left-0 w-full h-full"
+              src={youtubeLinkplay}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </Dialog.Panel>
+      </Dialog>
     </div>
   )
 }

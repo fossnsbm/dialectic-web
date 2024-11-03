@@ -8,10 +8,11 @@ import Image from 'next/image'
 import Container from '../container'
 import NavLinks from '@/data/nav/nav'
 import Link from 'next/link'
-
+import { useRouter } from 'next/navigation'
 const Navigation = () => {
   const [navbarOpen, setNavbarOpen] = useState(false)
   const [windowScrolled, setWindowScrolled] = useState(false)
+  const [userId, setUserId] = useState<string | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +20,15 @@ const Navigation = () => {
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedUserId = sessionStorage.getItem('token')
+      setUserId(storedUserId)
+    }
   }, [])
 
   return (
@@ -69,14 +79,30 @@ const Navigation = () => {
                 ))}
               </ul>
             </div>
-            <div>
+
+            {userId ? (
+              <div>
+                <Button
+                  className=" md:block hidden transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 hover:bg-gray-900 duration-300"
+                  variant={'black-outline'}
+                  onClick={() => {
+                    router.push('/admin/addepisode')
+                  }}
+                >
+                  Dashboard
+                </Button>
+              </div>
+            ) : (
               <Button
                 className=" md:block hidden transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 hover:bg-gray-900 duration-300"
                 variant={'black-outline'}
+                onClick={() => {
+                  router.push('/login')
+                }}
               >
-                Check In
+                Login
               </Button>
-            </div>
+            )}
             <div className="block mobile-menu md:hidden">
               {!navbarOpen ? (
                 <button
