@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 
 dotenv.config()
 
-const MONGODB_URI = process.env.MONGO_URI as string
+const MONGODB_URI = process.env.MONGODB_URI as string
 
 if (!MONGODB_URI) {
   throw new Error(
