@@ -74,7 +74,7 @@ const Hero = () => {
               </a>
               <a href="">
                 <Image
-                  src={'/images/hero/Rss.svg'}
+                  src={'/images/hero/rss.svg'}
                   width={20}
                   height={20}
                   alt="icon"

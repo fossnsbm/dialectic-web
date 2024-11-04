@@ -62,7 +62,7 @@ const Navigation = () => {
                 className="transition-all duration-300 ease-in-out"
               />
               <Image
-                src={'/images/FOSS_Logo.svg'}
+                src={'/images/fosslogo.svg'}
                 width={50}
                 height={50}
                 alt="Your Logo"
@@ -84,29 +84,6 @@ const Navigation = () => {
               </ul>
             </div>
 
-            {userId ? (
-              <div>
-                <Button
-                  className=" md:block hidden transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 hover:bg-gray-900 duration-300"
-                  variant={'black-outline'}
-                  onClick={() => {
-                    router.push('/admin/addepisode')
-                  }}
-                >
-                  Dashboard
-                </Button>
-              </div>
-            ) : (
-              <Button
-                className=" md:block hidden transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 hover:bg-gray-900 duration-300"
-                variant={'black-outline'}
-                onClick={() => {
-                  router.push('/login')
-                }}
-              >
-                Login
-              </Button>
-            )}
             <div className="block mobile-menu md:hidden">
               {!navbarOpen ? (
                 <button
