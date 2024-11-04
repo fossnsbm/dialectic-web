@@ -20,7 +20,7 @@ export default function UserNav() {
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative rounded-full w-8 h-8">
             <Avatar>
-              <AvatarImage src="/images/FOSS_Logo.png" alt="User Avatar" />
+              <AvatarImage src="/images/fosslogo.svg" alt="User Avatar" />
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
