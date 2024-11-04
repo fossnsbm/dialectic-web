@@ -12,7 +12,8 @@ import {
   PlayIcon,
   Share,
 } from 'lucide-react'
-
+import { Alert } from '@mui/material'
+import AlertDialog from '@/components/common/alert-dialog-idit'
 interface EpisodeData {
   speakerImage: string
   speakerName: string
@@ -113,8 +114,11 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
   }, [_id])
 
   if (!episodeData) {
-    return
+    return null
   }
+
+  const fullDateString = `${episodeData.episodeDate}`
+  const dateOnly = fullDateString.substring(0, 10)
 
   return (
     <div className="flex flex-col sm:flex-row items-center justify-center gap-10 p-8 border-2 rounded-xl bg-blue-200 border-white-0 text-white-0 max-w-auto">
@@ -134,7 +138,7 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
       <div className="flex flex-col sm:items-start justify-center sm:gap-4 gap-4 max-w-auto text-justify">
         <div className="font-semibold text-xl">{episodeData.episodeTitle}</div>
         <div className="text-gray-900">
-          Episode | {episodeData.episodeDate} | {episodeData.episodeDuration}min{' '}
+          Episode | {dateOnly} | {episodeData.episodeDuration}min{' '}
         </div>
         <div className="sm:block hidden">{episodeData.episodeDescription}</div>
         <div className="flex flex-col sm:flex-row items-center justify-center sm:gap-10 gap-4">
@@ -152,12 +156,9 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
             <div>Share</div>
             <Share />
           </Button>
-          <Button variant={'white-outline-2'} className="gap-2">
-            <div>Edit</div>
-            <div>
-              <PlayIcon />
-            </div>
-          </Button>
+
+          <AlertDialog id={id} />
+
           <Button
             variant={'secondary'}
             className="gap-2"
