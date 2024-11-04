@@ -5,6 +5,7 @@ import '../../styles/fonts/fonts'
 import { useRouter } from 'next/navigation'
 
 import Image from 'next/image'
+import Link from 'next/link'
 
 const Hero = () => {
   const router = useRouter()
@@ -15,11 +16,11 @@ const Hero = () => {
           <div className="flex items-center justify-center gap-6 bg-gray-50 rounded-full pr-4">
             <div>
               <Button variant={'blue'} size={'rounded'}>
-                New
+                <Link href={'https://www.fossnsbm.org/'} target="_blank" rel="noopener noreferrer">FOSS NSBM</Link> 
               </Button>
             </div>
             <div className="font-medium text-gray-800 mb-[3px] text-base pr-3">
-              Lorem ipsum dolor sit amet.
+              Welcome to Dialectic
             </div>
           </div>
           <div className="text-4xl font-semibold md:text-6xl md:whitespace-pre-line font-inter md:font-medium md:text-justify md:leading-[4.5rem]">
@@ -28,9 +29,7 @@ const Hero = () => {
             One Byte at a Time.
           </div>
           <div className="text-md md:w-[80%] leading-7  ">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et
-            est leo. Nulla fermentum ultrices ullamcorper. Nam eleifend mi sed
-            sem convallis condimentum.
+          Welcome to Dialectic, a tech podcast where we explore the ever-changing tech landscape through dialectic discussions. 
           </div>
           <div>
             <Button

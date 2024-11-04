@@ -26,16 +26,15 @@ const latest = () => {
                   Episode 1
                 </Button>
               </div>
-              <div>Speaker Name | 33 mins</div>
+              <div>Ruwan Ranganath | 58 mins</div>
             </div>
 
             <div className="flex flex-col gap-2 ">
               <div className=" text-4xl md:text-6xl font-medium ">
-                Start career path as a Product Designer in Startup
+                Dive into FOSS
               </div>
               <div className=" text-lg text-gray-400 text-balance">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                et est leo. Nulla fermentum ultrices ullamcorper.
+              "In this episode of Dive into FOSS, we explore the impact of open-source software, history of FOSS NSBM, featuring insights from developers on how FOSS drives innovation and community. Tune in to learn how you can start contributing!"
               </div>
             </div>
 

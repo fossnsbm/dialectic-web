@@ -21,8 +21,7 @@ export default function Footer() {
               ></Image>
             </div>
             <div className="sm:w-2/3 sm:text-left text-justify">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et
-              est leo. Nulla fermentum ultrices ullamcorper.
+            Welcome to Dialectic, a tech podcast where we explore the ever-changing tech landscape through dialectic discussions. 
             </div>
           </div>
 
