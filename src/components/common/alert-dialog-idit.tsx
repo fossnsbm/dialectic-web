@@ -58,7 +58,7 @@ export default function SignUpDialog({ id }: { id: string }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ _id: id }), // Ensure `id` is defined in the component's scope
+        body: JSON.stringify({ _id: id }),
       })
 
       if (!response.ok) {
@@ -82,12 +82,11 @@ export default function SignUpDialog({ id }: { id: string }) {
         console.error('An unknown error occurred')
       }
     }
-  }, [id]) // Add `id` as a dependency if it's coming from props or state
+  }, [id])
 
   useEffect(() => {
     fetchEpisodeData()
-  }, [fetchEpisodeData]) // Now `fetchEpisodeData` is safely in the dependency array
-
+  }, [fetchEpisodeData])
   const clearInputs = () => {
     setFormData({
       title: '',
@@ -174,7 +173,7 @@ export default function SignUpDialog({ id }: { id: string }) {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button variant={'white-outline-2'} className="gap-2">
-          Add Episode
+          Edit Episode
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>

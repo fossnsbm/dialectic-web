@@ -62,7 +62,7 @@ const Navigation = () => {
                 className="transition-all duration-300 ease-in-out"
               />
               <Image
-                src={'/images/FOSS_Logo.svg'}
+                src={'/images/fosslogo.svg'}
                 width={50}
                 height={50}
                 alt="Your Logo"

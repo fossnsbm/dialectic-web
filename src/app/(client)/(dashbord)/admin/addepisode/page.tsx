@@ -7,7 +7,7 @@ import Cards from '@/components/common/Episode_cardadmin'
 
 interface Episode {
   _id: string
-  createdAt: string // Assuming you have a createdAt property in your episode object
+  createdAt: string
 }
 
 const UserClient = () => {
