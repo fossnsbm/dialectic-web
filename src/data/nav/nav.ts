@@ -14,5 +14,10 @@ const NavLinks: INavLinks[] = [
     name: 'Favorites',
     link: '/favorites',
   },
+
+  {
+    name: 'Login',
+    link: '/login',
+  },
 ]
 export default NavLinks

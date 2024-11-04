@@ -4,7 +4,6 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
 import MenuOverlay from './MenuOverlay'
 import Button from 'components/common/buttons/primary'
 import Image from 'next/image'
-
 import Container from '../container'
 import NavLinks from '@/data/nav/nav'
 import Link from 'next/link'
@@ -13,7 +12,7 @@ const Navigation = () => {
   const [navbarOpen, setNavbarOpen] = useState(false)
   const [windowScrolled, setWindowScrolled] = useState(false)
   const [userId, setUserId] = useState<string | null>(null)
-
+  const Router = useRouter()
   useEffect(() => {
     const handleScroll = () => {
       setWindowScrolled(window.scrollY > 0)
@@ -42,7 +41,12 @@ const Navigation = () => {
           }
         >
           <div className="flex items-center justify-between py-2">
-            <div className="flex items-center justify-center gap-6">
+            <div
+              className="flex items-center justify-center gap-6 cursor-pointer"
+              onClick={() => {
+                Router.push('/')
+              }}
+            >
               <Image
                 src={'/images/logo.png'}
                 width={100}
