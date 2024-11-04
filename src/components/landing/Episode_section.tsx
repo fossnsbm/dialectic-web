@@ -49,6 +49,13 @@ const EpisodeSection = () => {
 
     fetchEpisodes()
   }, [])
+  if (loading) {
+    return (
+      <div className="h-max flex justify-center items-center ">
+        <span className="loader"></span>
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col items-center justify-center bg-gray-900 gap-10 p-4">

@@ -53,6 +53,14 @@ const Allepisode = () => {
     fetchEpisodes()
   }, [])
 
+  if (loading) {
+    return (
+      <div className="h-screen flex justify-center items-center ">
+        <span className="loader"></span>
+      </div>
+    )
+  }
+
   return (
     <div>
       <Navigation />

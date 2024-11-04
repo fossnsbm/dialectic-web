@@ -90,6 +90,8 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
   if (!episodeData) {
     return
   }
+  const fullDateString = `${episodeData.episodeDate}`
+  const dateOnly = fullDateString.substring(0, 10)
 
   return (
     <div className="flex flex-col sm:flex-row items-center justify-center gap-10 p-8 border-2 rounded-xl bg-blue-200 border-white-0 text-white-0 max-w-auto">
@@ -113,7 +115,7 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
           {episodeData.episodeTitle} {/* Render the actual episode title */}
         </div>
         <div className="text-gray-900">
-          Episode | {episodeData.episodeDate} | {episodeData.episodeDuration}min{' '}
+          Episode | {dateOnly} | {episodeData.episodeDuration}min{' '}
           {/* Render actual data */}
         </div>
         <div className="sm:block hidden">
