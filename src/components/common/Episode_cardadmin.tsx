@@ -12,7 +12,8 @@ import {
   PlayIcon,
   Share,
 } from 'lucide-react'
-
+import { Alert } from '@mui/material'
+import AlertDialog from '@/components/common/alert-dialog-idit'
 interface EpisodeData {
   speakerImage: string
   speakerName: string
@@ -152,12 +153,9 @@ const Episode_card: React.FC<CardsProps> = ({ id }) => {
             <div>Share</div>
             <Share />
           </Button>
-          <Button variant={'white-outline-2'} className="gap-2">
-            <div>Edit</div>
-            <div>
-              <PlayIcon />
-            </div>
-          </Button>
+
+          <AlertDialog id={id} />
+
           <Button
             variant={'secondary'}
             className="gap-2"

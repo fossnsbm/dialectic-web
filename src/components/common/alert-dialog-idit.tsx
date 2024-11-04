@@ -1,0 +1,348 @@
+'use client'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
+import { Button } from '@/components/common/buttons'
+import { useEffect, useState } from 'react'
+import { Label } from '@radix-ui/react-dropdown-menu'
+import { Input } from '@/components/ui/input'
+
+export default function SignUpDialog({ id }: { id: string }) {
+  const [step, setStep] = useState(1)
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [uploadStatus, setUploadStatus] = useState('')
+  const [loading, setLoading] = useState(false)
+  interface EpisodeData {
+    speakerImage: string
+    speakerName: string
+    speakerPosition: string
+    episodeTitle: string
+    episodeDate: string
+    episodeDuration: string
+    episodeDescription: string
+    youtubecode: string
+  }
+
+  const [episodeData, setEpisodeData] = useState<EpisodeData>({
+    speakerImage: '',
+    speakerName: '',
+    speakerPosition: '',
+    episodeTitle: '',
+    episodeDate: '',
+    episodeDuration: '',
+    episodeDescription: '',
+    youtubecode: '',
+  })
+  const [formData, setFormData] = useState({
+    title: '',
+    speakerposition: '',
+    duration: '',
+    describe: '',
+    speakername: '',
+    youtubecode: '',
+  })
+  const _id = id
+
+  const fetchEpisodeData = async () => {
+    try {
+      const response = await fetch('/api/episode/fetchepisode', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ _id: id }), // Ensure the ID is passed correctly
+      })
+
+      const data = await response.json()
+
+      setFormData({
+        title: data.title || '',
+        speakerposition: data.speakerposition || '',
+        duration: data.duration || '',
+        describe: data.describe || '',
+        speakername: data.speakername || '',
+        youtubecode: data.youtubecode || '',
+      })
+    } catch (error) {
+      console.error('Failed to fetch episode data:', error)
+    }
+  }
+
+  useEffect(() => {
+    fetchEpisodeData()
+  }, [id])
+
+  const clearInputs = () => {
+    setFormData({
+      title: '',
+      speakerposition: '',
+      duration: '',
+      describe: '',
+      speakername: '',
+      youtubecode: '',
+    })
+    setSelectedFile(null)
+    setUploadStatus('')
+    setStep(1)
+    fetchEpisodeData() // Now accessible here
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }))
+  }
+
+  const handleNext = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (step < 3) {
+      setStep(step + 1)
+    }
+  }
+
+  const handlePrevious = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (step > 1) {
+      setStep(step - 1)
+    }
+  }
+
+  const REQUIRED_WIDTH = 240
+  const REQUIRED_HEIGHT = 232
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0]
+
+      const img = new Image()
+      const objectUrl = URL.createObjectURL(file)
+
+      img.onload = () => {
+        if (img.width === REQUIRED_WIDTH && img.height === REQUIRED_HEIGHT) {
+          setSelectedFile(file)
+          setUploadStatus('')
+        } else {
+          setUploadStatus(
+            `Image must be exactly ${REQUIRED_WIDTH}x${REQUIRED_HEIGHT} pixels.`,
+          )
+          setSelectedFile(null)
+        }
+
+        URL.revokeObjectURL(objectUrl)
+      }
+
+      img.onerror = () => {
+        setUploadStatus(
+          'Error loading image. Please select a valid image file.',
+        )
+        setSelectedFile(null)
+        URL.revokeObjectURL(objectUrl)
+      }
+
+      img.src = objectUrl
+    } else {
+      setUploadStatus('Please select a valid image file.')
+      setSelectedFile(null)
+    }
+  }
+
+  const handleUpload = async () => {
+    if (!selectedFile) {
+      setUploadStatus('Please select a file first!')
+      return
+    }
+
+    const formData = new FormData()
+    formData.append('file', selectedFile)
+
+    try {
+      const response = await fetch('/api/episode/upload', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (response.ok) {
+        setUploadStatus('File uploaded successfully!')
+      } else {
+        setUploadStatus('File upload failed!')
+      }
+
+      const data = await response.json()
+      console.log('Upload response:', data.url)
+      return data.url
+    } catch (error) {
+      setUploadStatus('An error occurred while uploading the file.')
+      console.error('Upload error:', error)
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+
+    const {
+      title,
+      speakerposition,
+      duration,
+      describe,
+      speakername,
+      youtubecode,
+    } = formData
+
+    try {
+      const response = await fetch('/api/episode/crud/edit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title,
+          speakerposition,
+          duration,
+          describe,
+          speakername,
+          youtubecode,
+          _id,
+        }),
+      })
+
+      if (response.ok) {
+        clearInputs()
+        setLoading(false)
+        window.location.reload()
+      } else {
+        alert('Failed to Update episode!')
+        setLoading(false)
+      }
+    } catch (error) {
+      console.error('Error updating episode:', error)
+      alert('An error occurred while updating the episode.')
+      setLoading(false)
+    }
+  }
+
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant={'white-outline-2'} className="gap-2">
+          Add Episode
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <form onSubmit={handleSubmit}>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Edit Episode Here</AlertDialogTitle>
+            <AlertDialogDescription>
+              Please fill out the form to add your episode details.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+
+          <div className="flex flex-col gap-4 p-4">
+            {step === 1 && (
+              <>
+                <div>
+                  <Label>Speaker Name</Label>
+                  <Input
+                    name="speakername"
+                    value={formData.speakername}
+                    onChange={handleChange}
+                    placeholder="Enter speaker name"
+                    required
+                  />
+                </div>
+                <div>
+                  <Label>Speaker Position</Label>
+                  <Input
+                    name="speakerposition"
+                    value={formData.speakerposition}
+                    onChange={handleChange}
+                    placeholder="Enter position"
+                    required
+                  />
+                </div>
+              </>
+            )}
+            {step === 2 && (
+              <>
+                <div className="flex gap-5 flex-col">
+                  <div>
+                    <Label>Episode Title</Label>
+                    <Input
+                      name="title"
+                      value={formData.title}
+                      onChange={handleChange}
+                      placeholder="Enter episode title"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label>Duration (min)</Label>
+                    <Input
+                      name="duration"
+                      value={formData.duration}
+                      onChange={handleChange}
+                      placeholder="Enter duration"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label>Description</Label>
+                    <Input
+                      name="describe"
+                      value={formData.describe}
+                      onChange={handleChange}
+                      placeholder="Enter description"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label>Youtubecode</Label>
+                    <Input
+                      name="youtubecode"
+                      value={formData.youtubecode}
+                      onChange={handleChange}
+                      placeholder="Enter code"
+                      required
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+
+          <AlertDialogFooter>
+            <div className="flex gap-9">
+              <AlertDialogCancel type="button" onClick={clearInputs}>
+                Cancel
+              </AlertDialogCancel>
+              {step > 1 && (
+                <Button className="h-9" type="button" onClick={handlePrevious}>
+                  Previous
+                </Button>
+              )}
+              {step < 3 ? (
+                <Button className="h-9" type="button" onClick={handleNext}>
+                  Next
+                </Button>
+              ) : (
+                <Button className="h-9" type="submit">
+                  {loading ? 'Updating...' : 'Update Episode detail'}
+                </Button>
+              )}
+            </div>
+          </AlertDialogFooter>
+        </form>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
