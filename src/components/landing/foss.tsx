@@ -18,7 +18,8 @@ const foss = () => {
             <div className="">We are the FOSS Community of NSBM</div>
           </div>
           <div className="sm:text-6xl text-3xl font-semibold">
-            Sri Lanka’s first ever {'\n'} University based {'\n'} FOSS Community
+            Sri Lanka&apos;s first ever {'\n'} University based {'\n'} FOSS
+            Community
           </div>
           <div>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit.
@@ -35,7 +36,7 @@ const foss = () => {
 
         <div className="flex-1">
           <Image
-            src={'/images/foss/Foss pictures.png'}
+            src={'/images/foss/fosspictures.png'}
             width={500}
             height={500}
             alt="image"
