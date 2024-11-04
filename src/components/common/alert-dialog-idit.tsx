@@ -11,7 +11,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/common/buttons'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Label } from '@radix-ui/react-dropdown-menu'
 import { Input } from '@/components/ui/input'
 
@@ -51,15 +51,19 @@ export default function SignUpDialog({ id }: { id: string }) {
   })
   const _id = id
 
-  const fetchEpisodeData = async () => {
+  const fetchEpisodeData = useCallback(async () => {
     try {
       const response = await fetch('/api/episode/fetchepisode', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ _id: id }), // Ensure the ID is passed correctly
+        body: JSON.stringify({ _id: id }), // Ensure `id` is defined in the component's scope
       })
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch episode data')
+      }
 
       const data = await response.json()
 
@@ -72,13 +76,17 @@ export default function SignUpDialog({ id }: { id: string }) {
         youtubecode: data.youtubecode || '',
       })
     } catch (error) {
-      console.error('Failed to fetch episode data:', error)
+      if (error instanceof Error) {
+        console.error(error.message)
+      } else {
+        console.error('An unknown error occurred')
+      }
     }
-  }
+  }, [id]) // Add `id` as a dependency if it's coming from props or state
 
   useEffect(() => {
     fetchEpisodeData()
-  }, [id])
+  }, [fetchEpisodeData]) // Now `fetchEpisodeData` is safely in the dependency array
 
   const clearInputs = () => {
     setFormData({
@@ -114,75 +122,6 @@ export default function SignUpDialog({ id }: { id: string }) {
     e.preventDefault()
     if (step > 1) {
       setStep(step - 1)
-    }
-  }
-
-  const REQUIRED_WIDTH = 240
-  const REQUIRED_HEIGHT = 232
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0]
-
-      const img = new Image()
-      const objectUrl = URL.createObjectURL(file)
-
-      img.onload = () => {
-        if (img.width === REQUIRED_WIDTH && img.height === REQUIRED_HEIGHT) {
-          setSelectedFile(file)
-          setUploadStatus('')
-        } else {
-          setUploadStatus(
-            `Image must be exactly ${REQUIRED_WIDTH}x${REQUIRED_HEIGHT} pixels.`,
-          )
-          setSelectedFile(null)
-        }
-
-        URL.revokeObjectURL(objectUrl)
-      }
-
-      img.onerror = () => {
-        setUploadStatus(
-          'Error loading image. Please select a valid image file.',
-        )
-        setSelectedFile(null)
-        URL.revokeObjectURL(objectUrl)
-      }
-
-      img.src = objectUrl
-    } else {
-      setUploadStatus('Please select a valid image file.')
-      setSelectedFile(null)
-    }
-  }
-
-  const handleUpload = async () => {
-    if (!selectedFile) {
-      setUploadStatus('Please select a file first!')
-      return
-    }
-
-    const formData = new FormData()
-    formData.append('file', selectedFile)
-
-    try {
-      const response = await fetch('/api/episode/upload', {
-        method: 'POST',
-        body: formData,
-      })
-
-      if (response.ok) {
-        setUploadStatus('File uploaded successfully!')
-      } else {
-        setUploadStatus('File upload failed!')
-      }
-
-      const data = await response.json()
-      console.log('Upload response:', data.url)
-      return data.url
-    } catch (error) {
-      setUploadStatus('An error occurred while uploading the file.')
-      console.error('Upload error:', error)
     }
   }
 
