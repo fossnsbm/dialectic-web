@@ -48,7 +48,10 @@ const popular_ep_sec = (props: Props) => {
               <span className="text-blue-200 font-medium"> Dialectic.</span>
             </div>
             <div className="sm:block hidden text-gray-0 font-quicksand text-lg text-right w-2/5">
-            "Explore our most popular episodes on Dialectic, where we dive into the hottest debates on open-source innovations, from the ethics of software freedom to the future of community-driven development."
+              &quot;Explore our most popular episodes on Dialectic, where we
+              dive into the hottest debates on open-source innovations, from the
+              ethics of software freedom to the future of community-driven
+              development.&quot;
             </div>
           </div>
         </Containerf>

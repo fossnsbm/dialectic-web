@@ -22,10 +22,17 @@ const foss = () => {
             Community
           </div>
           <div>
-          Welcome to Sri Lanka's first university-based FOSS Community! This initiative empowers students to explore Free and Open Source Software, develop skills, and collaborate on projects, fostering innovation and a vibrant open-source culture on campus.
+            Welcome to Sri Lanka&apos;s first university-based FOSS Community!
+            This initiative empowers students to explore Free and Open Source
+            Software, develop skills, and collaborate on projects, fostering
+            innovation and a vibrant open-source culture on campus.
           </div>
           <div>
-            <Link href="https://www.fossnsbm.org/" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://www.fossnsbm.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button>Keep in Touch with us</Button>
             </Link>
           </div>
