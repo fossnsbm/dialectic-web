@@ -1,35 +1,34 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
-
+import Admin from '@/model/admin'
+import { connectToDatabase } from '@/utils/db'
 dotenv.config()
-
-// Ensure passwords in the database are hashed
-const usersDB = [
-  {
-    email: 'admin@gmail.com',
-    password: await bcrypt.hash('yohanmano', 10), // Hash the password
-    id: 10909,
-  },
-]
 
 // POST handler with enhanced security
 export async function POST(req: Request) {
   try {
+    await connectToDatabase()
     const { email, password } = await req.json()
 
-    const user = usersDB.find((user) => user.email === email)
+    const user = await Admin.findOne({ email: email })
     if (!user) {
-      return new Response(JSON.stringify({ message: 'Invalid credentials' }), {
-        status: 401,
-      })
+      return new Response(
+        JSON.stringify({ message: 'Invalid email credentials' }),
+        {
+          status: 401,
+        },
+      )
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password)
     if (!passwordMatch) {
-      return new Response(JSON.stringify({ message: 'Invalid credentials' }), {
-        status: 401,
-      })
+      return new Response(
+        JSON.stringify({ message: 'Invalid password credentials' }),
+        {
+          status: 401,
+        },
+      )
     }
 
     if (!process.env.JWT_SECRET) {
