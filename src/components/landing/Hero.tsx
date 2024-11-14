@@ -88,7 +88,7 @@ const Hero = () => {
           <div className="flex items-center justify-center">
             <div className=" w-full bg-center bg-cover relative grid grid-cols-2 grid-rows-2 gap-4">
               <div className="rounded-full bg-blue-800 h-24 w-24  absolute flex items-center justify-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-0 text-center z-2 whitespace-pre-line ">
-                20+ {'\n'} Podcasts
+                Tech {'\n'} Podcasts
               </div>
               <Image
                 src={'/images/hero/tl.png'}
@@ -131,7 +131,7 @@ const Hero = () => {
                 height={100}
               ></Image>
             </div>
-            <div className="flex-1">Lorem ipsum dolor sit amet.</div>
+            <div className="flex-1">Specker's from the industry</div>
           </div>
         </div>
       </div>

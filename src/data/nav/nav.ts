@@ -10,9 +10,9 @@ const NavLinks: INavLinks[] = [
     name: 'Episodes',
     link: '/episodes',
   },
-  {
-    name: 'Favorites',
-    link: '/favorites',
-  },
+  // {
+  //   name: 'Favorites',
+  //   link: '/favorites',
+  // },
 ]
 export default NavLinks
