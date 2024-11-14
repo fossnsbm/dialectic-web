@@ -131,7 +131,7 @@ const Hero = () => {
                 height={100}
               ></Image>
             </div>
-            <div className="flex-1">Specker's from the industry</div>
+            <div className="flex-1">Specker&apos;s from the industry</div>
           </div>
         </div>
       </div>
