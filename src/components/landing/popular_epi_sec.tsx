@@ -11,7 +11,7 @@ type Props = {}
 
 const popular_ep_sec = (props: Props) => {
   const card1 = {
-    backGround: bgImage1.src,
+    backGround: '/images/bgImg1.svg',
     speakerInfo: 'Speaker Name 3 | x minutes',
     episodeTitle: 'Episode 1',
     heading: 'Lorem ipsum dolor sit amet consectetur adipiscing',
@@ -33,8 +33,8 @@ const popular_ep_sec = (props: Props) => {
   const card4 = {
     backGround: bgImage4.src,
     speakerInfo: 'Speaker Name 4 | x minutes',
-    episodeTitle: 'Episode 4',
-    heading: 'Lorem ipsum dolor sit amet consectetur adipiscing',
+    episodeTitle: 'Comming soon',
+    heading: 'Comming soon',
   }
 
   return (
