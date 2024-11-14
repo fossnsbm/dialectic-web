@@ -14,7 +14,7 @@ import {
   Share,
 } from 'lucide-react'
 import { Dialog } from '@headlessui/react'
-const latest = () => {
+const Latest = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
@@ -95,4 +95,4 @@ const latest = () => {
   )
 }
 
-export default latest
+export default Latest
