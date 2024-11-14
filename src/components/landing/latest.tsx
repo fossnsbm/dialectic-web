@@ -1,9 +1,11 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import { Button, Container } from '../common'
 import '../../styles/fonts/fonts'
 import Image from 'next/image'
 import latest_img from '/public/images/Latest Episode Section Image.png'
 import { FaRegCirclePlay } from 'react-icons/fa6'
+
 import {
   BluetoothConnected,
   PlaneIcon,
@@ -12,10 +14,11 @@ import {
   Share,
 } from 'lucide-react'
 import { Dialog } from '@headlessui/react'
-const latest = () => {
-  // const openModal = () => setIsModalOpen(true)
-  // const closeModal = () => setIsModalOpen(false)
-  // const youtubeLinkplay = `https://www.youtube.com/embed/${episodeData?.youtubecode}`
+const Latest = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const openModal = () => setIsModalOpen(true)
+  const closeModal = () => setIsModalOpen(false)
+  const youtubeLinkplay = `https://www.youtube.com/embed/Wfm_5ahpbR4`
   return (
     <div>
       <Container>
@@ -53,7 +56,7 @@ const latest = () => {
             </div>
 
             <div className="flex items-center sm:justify-start justify-center">
-              <Button className="gap-2">
+              <Button className="gap-2" onClick={openModal}>
                 <div>Listen Now</div>
                 <div>
                   <PlayCircle />
@@ -63,7 +66,7 @@ const latest = () => {
           </div>
         </div>
       </Container>
-      {/* <Dialog
+      <Dialog
         open={isModalOpen}
         onClose={closeModal}
         className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-65 "
@@ -87,9 +90,9 @@ const latest = () => {
             ></iframe>
           </div>
         </Dialog.Panel>
-      </Dialog> */}
+      </Dialog>
     </div>
   )
 }
 
-export default latest
+export default Latest

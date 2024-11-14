@@ -16,7 +16,13 @@ const Hero = () => {
           <div className="flex items-center justify-center gap-6 bg-gray-50 rounded-full pr-4">
             <div>
               <Button variant={'blue'} size={'rounded'}>
-                <Link href={'https://www.fossnsbm.org/'} target="_blank" rel="noopener noreferrer">FOSS NSBM</Link> 
+                <Link
+                  href={'https://www.fossnsbm.org/'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  FOSS NSBM
+                </Link>
               </Button>
             </div>
             <div className="font-medium text-gray-800 mb-[3px] text-base pr-3">
@@ -29,7 +35,8 @@ const Hero = () => {
             One Byte at a Time.
           </div>
           <div className="text-md md:w-[80%] leading-7  ">
-          Welcome to Dialectic, a tech podcast where we explore the ever-changing tech landscape through dialectic discussions. 
+            Welcome to Dialectic, a tech podcast where we explore the
+            ever-changing tech landscape through dialectic discussions.
           </div>
           <div>
             <Button
@@ -44,36 +51,29 @@ const Hero = () => {
           </div>
           <div className="flex items-center justify-center gap-4">
             <div className="flex items-center justify-center">
-              <p>Listen on:</p>
+              <p>Listen on</p>
             </div>
             <div className="flex items-center gap-4 justify-center animate">
-              <a href="">
+              <a href="https://www.instagram.com/fossnsbm/">
                 <Image
-                  src={'/images/hero/Spotify.svg'}
-                  width={20}
-                  height={20}
-                  alt=""
-                ></Image>
-              </a>
-              <a href="">
-                <Image
-                  src={'/images/hero/Apple_podcasts.svg'}
+                  src={'/images/hero_icons/instagram.png'}
                   width={20}
                   height={20}
                   alt="icon"
                 ></Image>
               </a>
-              <a href="">
+
+              <a href="https://www.facebook.com/foss.nsbm">
                 <Image
-                  src={'/images/hero/Overcast.svg'}
+                  src={'/images/hero_icons/facebook.png'}
                   width={20}
                   height={20}
                   alt="icon"
                 ></Image>
               </a>
-              <a href="">
+              <a href="https://www.youtube.com/@fosscommunitynsbm8708">
                 <Image
-                  src={'/images/hero/rss.svg'}
+                  src={'/images/hero_icons/youtube.png'}
                   width={20}
                   height={20}
                   alt="icon"
@@ -88,7 +88,7 @@ const Hero = () => {
           <div className="flex items-center justify-center">
             <div className=" w-full bg-center bg-cover relative grid grid-cols-2 grid-rows-2 gap-4">
               <div className="rounded-full bg-blue-800 h-24 w-24  absolute flex items-center justify-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-0 text-center z-2 whitespace-pre-line ">
-                20+ {'\n'} Podcasts
+                Tech {'\n'} Podcasts
               </div>
               <Image
                 src={'/images/hero/tl.png'}
@@ -131,7 +131,7 @@ const Hero = () => {
                 height={100}
               ></Image>
             </div>
-            <div className="flex-1">Lorem ipsum dolor sit amet.</div>
+            <div className="flex-1">Specker&apos;s from the industry</div>
           </div>
         </div>
       </div>
