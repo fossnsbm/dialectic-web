@@ -78,7 +78,7 @@ async function sendEmailToSubscribers(
               </div>
               <a href="${youtubeLink}" class="cta-button">Watch on YouTube</a>
               <div class="footer">
-                <p>If you don't want to receive updates from us, you can <a href="#">unsubscribe here</a>.</p>
+                <p>If you don't want to receive updates from us.</p>
               </div>
             </div>
           </body>
