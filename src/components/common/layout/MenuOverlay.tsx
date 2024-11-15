@@ -1,25 +1,33 @@
 'use client'
 import React from 'react'
-import NavLink from './NavLink'
+import NavLinks from '@/data/nav/nav'
+import Link from 'next/link'
 
-interface Link {
-  path: string
-  title: string
+interface NavLinks {
+  link: string
+  name: string
 }
 
 interface MenuOverlayProps {
-  links: Link[]
+  links: NavLinks[]
+  closeMenu: () => void
 }
 
-const MenuOverlay: React.FC<MenuOverlayProps> = ({ links }) => {
+const MenuOverlay: React.FC<MenuOverlayProps> = ({ links, closeMenu }) => {
   return (
-    <ul className="flex flex-col py-4 items-center">
-      {links.map((link, index) => (
-        <li key={index}>
-          <NavLink href={link.path} title={link.title} />
-        </li>
+    <div className="flex flex-col py-4 items-center">
+      {NavLinks.map((item) => (
+        <div key={item.name}>
+          <Link
+            className="block py-2 pl-3 pr-4 text-gray-600 sm:text-xl rounded md:p-0 hover:text-blue-400 hover:font-bold hover:animate-pulse"
+            href={item.link}
+            onClick={closeMenu}
+          >
+            {item.name}{' '}
+          </Link>
+        </div>
       ))}
-    </ul>
+    </div>
   )
 }
 

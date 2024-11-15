@@ -1,26 +1,24 @@
 import React from 'react'
 import { Footer, Navigation, Savedbar } from 'components/common/layout/'
+import Episode_card from '@/components/common/Episode_card'
 import {
-  Hero,
-  Popular_ep_sec,
-  Latest_ep,
-  // Episode_section,
   FOSS_section,
+  Hero,
+  Latest_ep,
   Logos,
   Newsletter_section,
-} from 'components/landing'
+} from '@/components/landing'
+import EpisodeSection from '@/components/landing/Episode_section'
+import Popular_ep_sec from '@/components/landing/popular_epi_sec'
 
-type Props = {}
-
-const Home = (props: Props) => {
+function home() {
   return (
     <div>
-      {/* <Savedbar /> */}
       <Navigation />
       <Hero />
       <Popular_ep_sec />
       <Latest_ep />
-      {/* <Episode_section /> */}
+      <EpisodeSection />
       <FOSS_section />
       <Logos />
       <Newsletter_section />
@@ -29,4 +27,4 @@ const Home = (props: Props) => {
   )
 }
 
-export default Home
+export default home

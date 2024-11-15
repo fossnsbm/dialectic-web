@@ -1,76 +1,89 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import NavLink from './NavLink'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
 import MenuOverlay from './MenuOverlay'
 import Button from 'components/common/buttons/primary'
 import Image from 'next/image'
-import dialectic_logo from '/public/images/footer_icons/logo.png'
-import x from '/public/images/footer_icons/x.png'
-import foss_logo from '/public/images/footer_icons/foss_logo.png'
-import Containerf from '../containerf'
 import Container from '../container'
-
-const navLinks = [
-  { title: 'Home', path: '/' },
-  { title: 'Episodes', path: '/episodes' },
-  { title: 'Favorites', path: '/favorites' },
-]
-
+import NavLinks from '@/data/nav/nav'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 const Navigation = () => {
   const [navbarOpen, setNavbarOpen] = useState(false)
   const [windowScrolled, setWindowScrolled] = useState(false)
+  const [userId, setUserId] = useState<string | null>(null)
+  const Router = useRouter()
+  useEffect(() => {
+    const handleScroll = () => {
+      setWindowScrolled(window.scrollY > 0)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setWindowScrolled(window.scrollY > 0)
-  //   }
-  //   window.addEventListener('scroll', handleScroll)
-  //   return () => window.removeEventListener('scroll', handleScroll)
-  // }, [])
+  const router = useRouter()
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedUserId = sessionStorage.getItem('token')
+      setUserId(storedUserId)
+    }
+  }, [])
 
   return (
     <div>
-      <nav
-        className={
-          windowScrolled
-            ? 'fixed top-0 left-0 right-0 z-10 bg-gray-0/20 backdrop-blur-lg !py-3 '
-            : 'top-0 left-0 right-0 z-10 bg-gray-0 !my-3 md:-mx-10'
-        }
-      >
-        <Container>
-          <div className="flex items-center justify-between py-2 lg:py-4">
-            <div className="flex items-center justify-center gap-6">
+      <Container>
+        <nav
+          className={
+            windowScrolled
+              ? 'fixed top-0 left-0 right-0 z-10 bg-gray-0/20 backdrop-blur-lg !py-3 px-4 xl:px-20 md:px-10 sm:px-10'
+              : 'top-0 left-0 right-0 z-10 bg-gray-0 !my-3 md'
+          }
+        >
+          <div className="flex items-center justify-between py-2">
+            <div
+              className="flex items-center justify-center gap-6 cursor-pointer"
+              onClick={() => {
+                Router.push('/')
+              }}
+            >
               <Image
-                src={dialectic_logo}
+                src={'/images/logo.png'}
+                width={100}
+                height={100}
                 alt="Your Logo"
                 className="transition-all duration-300 ease-in-out"
               />
               <Image
-                src={x}
+                src={'/images/x.png'}
+                width={20}
+                height={20}
                 alt="Your Logo"
                 className="transition-all duration-300 ease-in-out"
               />
               <Image
-                src={foss_logo}
+                src={'/images/fosslogo.svg'}
+                width={50}
+                height={50}
                 alt="Your Logo"
                 className="transition-all duration-300 ease-in-out"
               />
             </div>
-            <div className="hidden menu md:block md:w-auto" id="navbar">
+            <div className="hidden menu md:block md:w-auto">
               <ul className="flex p-4 mt-0 md:p-0 md:flex-row md:space-x-8 font-semibold">
-                {navLinks.map((link, index) => (
-                  <li key={index}>
-                    <NavLink href={link.path} title={link.title} />
-                  </li>
+                {NavLinks.map((item) => (
+                  <div key={item.name}>
+                    <Link
+                      className="block py-2 pl-3 pr-4 text-gray-600 sm:text-xl rounded md:p-0 hover:text-blue-400 hover:font-bold hover:animate-pulse"
+                      href={item.link}
+                    >
+                      {item.name}{' '}
+                    </Link>
+                  </div>
                 ))}
               </ul>
             </div>
-            <div>
-              <Button className="sm:block hidden" variant={'black-outline'}>
-                Check In
-              </Button>
-            </div>
+
             <div className="block mobile-menu md:hidden">
               {!navbarOpen ? (
                 <button
@@ -89,9 +102,15 @@ const Navigation = () => {
               )}
             </div>
           </div>
-        </Container>
-        {navbarOpen ? <MenuOverlay links={navLinks} /> : null}
-      </nav>
+
+          {navbarOpen ? (
+            <MenuOverlay
+              links={NavLinks}
+              closeMenu={() => setNavbarOpen(false)}
+            />
+          ) : null}
+        </nav>
+      </Container>
     </div>
   )
 }

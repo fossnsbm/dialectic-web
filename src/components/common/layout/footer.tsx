@@ -1,71 +1,73 @@
 import React from 'react'
 import Image from 'next/image'
-import Containerf from '../containerf'
+import Link from 'next/link'
+import NavLinks from '@/data/nav/nav'
+import Container from '../container'
+import footerlinks from '@/data/footer/footer'
+import { Year } from '@/helpers'
 
-import logo from '/public/images/footer_icons/logo.png'
-import logo2 from '/public/images/footer_icons/foss_logo.png'
-import github from '/public/images/footer_icons/mdi_github.png'
-import linkedin from '/public/images/footer_icons/ri_linkedin-fill.png'
-import insta from '/public/images/footer_icons/ri_instagram-fill.png'
-import facebook from '/public/images/footer_icons/uil_facebook.png'
-import x from '/public/images/footer_icons/mdi_twitter.png'
-import youtube from '/public/images/footer_icons/mdi_youtube.png'
-
-type Props = {}
-
-const Footer = (props: Props) => {
+export default function Footer() {
   return (
-    <Containerf>
-      <div className="flex flex-col sm:flex-row items-center justify-center p-6 font-inter gap-16">
-        <div className="flex flex-col justify-center sm:items-start items-center gap-4 flex-1">
-          <div className="flex flex-col items-center justify-center">
-            <Image src={logo} alt="balck logo"></Image>
+    <div>
+      <Container>
+        <div className="flex flex-col sm:flex-row items-center justify-center py-10 font-inter gap-16">
+          <div className="flex flex-col justify-center sm:items-start items-center gap-4 flex-1">
+            <div className="flex flex-col items-center justify-center">
+              <Image
+                src={'/images/logo.png'}
+                width={200}
+                height={200}
+                alt="balck logo"
+              ></Image>
+            </div>
+            <div className="sm:w-2/3 sm:text-left text-justify">
+            Welcome to Dialectic, a tech podcast where we explore the ever-changing tech landscape through dialectic discussions. 
+            </div>
           </div>
-          <div className="sm:w-2/3 sm:text-left text-justify">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam et
-            est leo. Nulla fermentum ultrices ullamcorper.
+
+          <div className="flex flex-col flex-1 items-center justify-center gap-4">
+            {NavLinks.map((item) => (
+              <div key={item.name}>
+                <Link
+                  className="block py-2 pl-3 pr-4 text-gray-600 sm:text-xl rounded md:p-0 hover:text-blue-400 hover:font-bold hover:animate-pulse"
+                  href={item.link}
+                >
+                  {item.name}{' '}
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col flex-1 sm:items-end items-center justify-center gap-4">
+            <div>
+              <Image
+                src={'/images/logos/FOSSLogo.svg'}
+                width={50}
+                height={50}
+                alt="foss_logo"
+              ></Image>
+            </div>
+            <div>Follow us on</div>
+            <div className="flex  gap-5 ">
+              {footerlinks.map((item) => (
+                <Link href={item.link} key={item.id}>
+                  <button className="hover:animate-bounce  ">
+                    <item.icon strokeWidth={1} />
+                  </button>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-        <div className="flex flex-col flex-1 items-center justify-center gap-4">
-          <div>
-            <a href="">Home</a>
+      </Container>
+      <div className="w-full bg-gray-900 sm:h-11 ">
+        <Container>
+          <div className="flex sm:flex-row flex-col text-gray-200 text-sm py-2 sm:justify-between items-center gap-2 ">
+            <div className=" flex "> &copy; {Year} FOSS COMMUNITY OF NSBM</div>
+            <div className="flex ">Dialectic By FOSS COMMUNITY OF NSBM </div>
           </div>
-          <div>
-            <a href="">Episodes</a>
-          </div>
-          <div>
-            <a href="">About</a>
-          </div>
-        </div>
-        <div className="flex flex-col flex-1 sm:items-end items-center justify-center gap-4">
-          <div>
-            <Image src={logo2} alt="foss_logo"></Image>
-          </div>
-          <div>Follow us on</div>
-          <div className="flex gap-2">
-            <div>
-              <Image src={github} alt="social_icons"></Image>
-            </div>
-            <div>
-              <Image src={linkedin} alt="social_icons"></Image>
-            </div>
-            <div>
-              <Image src={insta} alt="social_icons"></Image>
-            </div>
-            <div>
-              <Image src={facebook} alt="social_icons"></Image>
-            </div>
-            <div>
-              <Image src={x} alt="social_icons"></Image>
-            </div>
-            <div>
-              <Image src={youtube} alt="social_icons"></Image>
-            </div>
-          </div>
-        </div>
+        </Container>
       </div>
-    </Containerf>
+    </div>
   )
 }
-
-export default Footer
