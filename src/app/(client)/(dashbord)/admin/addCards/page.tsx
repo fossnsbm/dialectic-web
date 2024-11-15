@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Heading } from '@/components/ui/heading'
-import AlertDialogDemocard from '@/components/common/alert-dialog-but-most-epiosode'
+import AlertDialogDemocard from '@/components/common/aler-dialog-idit-card'
 import Containerf from '@/components/common/containerf'
 import Popular_ep from '@/components/common/popular_ep-admin'
 
@@ -54,9 +54,7 @@ const UserClient = () => {
         className="h-screen flex justify-center items-center"
         aria-busy="true"
       >
-        <span className="loader" aria-label="Loading episodes">
-          Loading...
-        </span>
+        <span className="loader" aria-label="Loading episodes"></span>
       </div>
     )
   }
