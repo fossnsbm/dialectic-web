@@ -36,8 +36,8 @@ export const navItemadmin: NavItemadmin[] = [
     label: 'User',
   },
   {
-    title: 'Settings',
-    href: '/admin/settings',
+    title: 'Subcribers',
+    href: '/admin/subcribers',
     icon: 'user',
     label: 'Settings',
   },
