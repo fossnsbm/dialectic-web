@@ -34,6 +34,6 @@ const cardSchema = new mongoose.Schema({
   },
 })
 
-const Card = mongoose.models.Episode || mongoose.model('Card', cardSchema)
+const Card = mongoose.models.Card || mongoose.model('Card', cardSchema)
 
 export default Card

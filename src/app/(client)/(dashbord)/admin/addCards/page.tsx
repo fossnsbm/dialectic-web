@@ -1,74 +1,46 @@
 'use client'
+
 import { useState, useEffect } from 'react'
 import { Heading } from '@/components/ui/heading'
-import AlertDialogDemo from '@/components/common/alert-dialog-but-most-epiosode'
-import Cards from '@/components/common/Episode_cardadmin'
+import AlertDialogDemocard from '@/components/common/alert-dialog-but-most-epiosode'
 import Containerf from '@/components/common/containerf'
 import Popular_ep from '@/components/common/popular_ep-admin'
-import bgImage1 from '/public/images/bgImg1.svg'
-import bgImage2 from '/public/images/bgImg2.svg'
-import bgImage3 from '/public/images/bgImg3.svg'
-import bgImage4 from '/public/images/bgImg4.svg'
-interface Episode {
+
+interface PopularEpProps {
   _id: string
-  createdAt: string
-}
-const card1 = {
-  backGround: bgImage1.src,
-  speakerInfo: 'Speaker Name 3 | x minutes',
-  episodeTitle: 'Episode 1',
-  heading: 'Lorem ipsum dolor sit amet consectetur adipiscing',
-}
-const card2 = {
-  backGround: bgImage2.src,
-  speakerInfo: 'Speaker Name 3 | x minutes',
-  episodeTitle: 'Episode 2',
-  heading: 'Lorem ipsum dolor sit amet consectetur adipiscing',
+  duration: string
+  describe?: string // Make this optional
+  speakername: string
+  speakerprofilepicurl?: string
+  title: string
 }
 
-const card3 = {
-  backGround: bgImage3.src,
-  speakerInfo: 'Speaker Name 3 | x minutes',
-  episodeTitle: 'Episode 3',
-  heading: 'Lorem ipsum dolor sit amet consectetur adipiscing',
-}
-
-const card4 = {
-  backGround: bgImage4.src,
-  speakerInfo: 'Speaker Name 4 | x minutes',
-  episodeTitle: 'Episode 4',
-  heading: 'Lorem ipsum dolor sit amet consectetur adipiscing',
-}
 const UserClient = () => {
-  const [episodes, setEpisodes] = useState<Episode[]>([])
+  const [episodes, setEpisodes] = useState<PopularEpProps[]>([])
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchEpisodes = async () => {
+      setLoading(true)
+      setError(null)
+
       try {
-        setLoading(true)
-        const response = await fetch('/api/episode/allepisodes', {
+        const response = await fetch('/api/card/allcards', {
           method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
         })
 
         if (!response.ok) {
-          throw new Error('Network response was not ok')
+          throw new Error('Failed to fetch episodes')
         }
 
-        const data: Episode[] = await response.json()
-
-        const sortedEpisodes = data.sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-        )
-
-        setEpisodes(sortedEpisodes)
-        setLoading(false)
+        const data: PopularEpProps[] = await response.json()
+        setEpisodes(data)
       } catch (error) {
         console.error('Error fetching episodes:', error)
+        setError('Failed to load episodes. Please try again later.')
+      } finally {
         setLoading(false)
       }
     }
@@ -78,8 +50,21 @@ const UserClient = () => {
 
   if (loading) {
     return (
-      <div className="h-screen flex justify-center items-center ">
-        <span className="loader"></span>
+      <div
+        className="h-screen flex justify-center items-center"
+        aria-busy="true"
+      >
+        <span className="loader" aria-label="Loading episodes">
+          Loading...
+        </span>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <p className="text-red-600">{error}</p>
       </div>
     )
   }
@@ -88,17 +73,15 @@ const UserClient = () => {
     <>
       <div className="flex items-start justify-between">
         <Heading
-          title={`Ensure need to keep maximum cards 0${4}`}
-          description={''}
+          title={`Ensure need to keep maximum cards ${episodes.length}`}
+          description=""
         />
-        <AlertDialogDemo />
       </div>
       <Containerf>
         <div className="flex flex-wrap justify-center lg:justify-between items-center gap-8 py-32">
-          <Popular_ep {...card1} />
-          <Popular_ep {...card2} />
-          <Popular_ep {...card3} />
-          <Popular_ep {...card4} />
+          {episodes.map((episode) => (
+            <Popular_ep key={episode._id} {...episode} />
+          ))}
         </div>
       </Containerf>
     </>

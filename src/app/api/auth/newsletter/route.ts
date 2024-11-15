@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import { connectToDatabase } from '@/utils/db'
-import mongoose, { Document, Model } from 'mongoose'
-
+import { Document } from 'mongoose'
+import EmailModel from '@/model/EmailModel'
 dotenv.config()
 
 // Define the interface for the email document
@@ -9,17 +9,6 @@ interface IEmail extends Document {
   email: string
 }
 
-// Define the email schema
-const emailSchema = new mongoose.Schema<IEmail>({
-  email: { type: String, required: true, unique: true },
-})
-
-// Create the email model
-const EmailModel: Model<IEmail> =
-  mongoose.models.Subscriptionemails ||
-  mongoose.model<IEmail>('Subscriptionemails', emailSchema)
-
-// POST request handler to subscribe an email
 export async function POST(req: Request): Promise<Response> {
   try {
     // Connect to the database

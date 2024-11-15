@@ -65,8 +65,8 @@ export default function SignUpDialog() {
     }
   }
 
-  const REQUIRED_WIDTH = 280
-  const REQUIRED_HEIGHT = 326
+  const REQUIRED_WIDTH = 282
+  const REQUIRED_HEIGHT = 328
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -148,7 +148,7 @@ export default function SignUpDialog() {
     const { title, duration, describe, speakername, youtubecode } = formData
 
     try {
-      const response = await fetch('/api/episode/card/addcard', {
+      const response = await fetch('/api/card/addcard', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -168,11 +168,11 @@ export default function SignUpDialog() {
         setLoading(false)
         window.location.reload()
       } else {
-        alert('Failed to add episode!')
+        alert('Failed to add Card!')
         setLoading(false)
       }
     } catch (error) {
-      console.error('Error adding episode:', error)
+      console.error('Error adding Card:', error)
       alert('An error occurred while adding the episode.')
       setLoading(false)
     }
