@@ -2,13 +2,15 @@
 import React, { useState } from 'react'
 import { Button } from '.'
 import Image from 'next/image'
-import playIcon from '/public/images/play.svg' // Ensure the play icon is available
+import playIcon from '/public/images/play.svg'
 import saveIcon from '/public/images/save.svg'
 
 import '../../styles/fonts/fonts'
 import { Dialog } from '@headlessui/react'
+import AlertDialog from '@/components/common/alert-dialog-idit'
 
 interface PopularEpProps {
+  _id: string
   duration: string
   describe?: string // Make this optional
   speakername: string
@@ -17,6 +19,7 @@ interface PopularEpProps {
 }
 
 const Popular_ep: React.FC<PopularEpProps> = ({
+  _id,
   duration,
   describe,
   speakername,
@@ -27,11 +30,14 @@ const Popular_ep: React.FC<PopularEpProps> = ({
   const speakerImageSrc = speakerprofilepicurl || fallbackImage
   const isDataMissing = describe === '' || speakername === '' || title === ''
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isEditing, setIsEditing] = useState(false) // State to toggle editing mode
 
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
 
   const youtubeLinkplay = `https://www.youtube.com/embed/Wfm_5ahpbR4`
+
+  const id = { _id }
 
   return (
     <>
@@ -98,10 +104,16 @@ const Popular_ep: React.FC<PopularEpProps> = ({
             <div className="flex justify-between items-center mt-4">
               <div className="text-gray-0 font-inter text-lg">{title}</div>
             </div>
+
+            {/* AlertDialog component with id passed */}
+            <div className="z-50">
+              <AlertDialog id={_id} /> {/* Passing the _id to AlertDialog */}
+            </div>
           </div>
         </div>
       </div>
 
+      {/* YouTube Modal */}
       <Dialog
         open={isModalOpen}
         onClose={closeModal}

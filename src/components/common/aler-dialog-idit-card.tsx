@@ -21,7 +21,9 @@ export default function SignUpDialog({ id }: { id: string }) {
   const [uploadStatus, setUploadStatus] = useState('')
   const [loading, setLoading] = useState(false)
   interface EpisodeData {
+    speakerImage: string
     speakerName: string
+    speakerPosition: string
     episodeTitle: string
     episodeDate: string
     episodeDuration: string
@@ -30,7 +32,9 @@ export default function SignUpDialog({ id }: { id: string }) {
   }
 
   const [episodeData, setEpisodeData] = useState<EpisodeData>({
+    speakerImage: '',
     speakerName: '',
+    speakerPosition: '',
     episodeTitle: '',
     episodeDate: '',
     episodeDuration: '',
@@ -39,6 +43,7 @@ export default function SignUpDialog({ id }: { id: string }) {
   })
   const [formData, setFormData] = useState({
     title: '',
+    speakerposition: '',
     duration: '',
     describe: '',
     speakername: '',
@@ -48,7 +53,7 @@ export default function SignUpDialog({ id }: { id: string }) {
 
   const fetchEpisodeData = useCallback(async () => {
     try {
-      const response = await fetch('/api/card/fetchcard', {
+      const response = await fetch('/api/episode/fetchepisode', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,6 +69,7 @@ export default function SignUpDialog({ id }: { id: string }) {
 
       setFormData({
         title: data.title || '',
+        speakerposition: data.speakerposition || '',
         duration: data.duration || '',
         describe: data.describe || '',
         speakername: data.speakername || '',
@@ -84,7 +90,7 @@ export default function SignUpDialog({ id }: { id: string }) {
   const clearInputs = () => {
     setFormData({
       title: '',
-
+      speakerposition: '',
       duration: '',
       describe: '',
       speakername: '',
@@ -124,7 +130,7 @@ export default function SignUpDialog({ id }: { id: string }) {
 
     const {
       title,
-
+      speakerposition,
       duration,
       describe,
       speakername,
@@ -132,14 +138,14 @@ export default function SignUpDialog({ id }: { id: string }) {
     } = formData
 
     try {
-      const response = await fetch('/api/episode/crud/edit', {
+      const response = await fetch('/api/card/edit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           title,
-
+          speakerposition,
           duration,
           describe,
           speakername,
@@ -167,13 +173,13 @@ export default function SignUpDialog({ id }: { id: string }) {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button variant={'white-outline-2'} className="gap-2">
-          Edit Card
+          Edit Episode
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <form onSubmit={handleSubmit}>
           <AlertDialogHeader>
-            <AlertDialogTitle>Edit Card Here</AlertDialogTitle>
+            <AlertDialogTitle>Edit Episode Here</AlertDialogTitle>
             <AlertDialogDescription>
               Please fill out the form to add your episode details.
             </AlertDialogDescription>
@@ -189,6 +195,16 @@ export default function SignUpDialog({ id }: { id: string }) {
                     value={formData.speakername}
                     onChange={handleChange}
                     placeholder="Enter speaker name"
+                    required
+                  />
+                </div>
+                <div>
+                  <Label>Speaker Position</Label>
+                  <Input
+                    name="speakerposition"
+                    value={formData.speakerposition}
+                    onChange={handleChange}
+                    placeholder="Enter position"
                     required
                   />
                 </div>
